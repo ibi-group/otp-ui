@@ -1747,6 +1747,11 @@
   resolved "https://registry.yarnpkg.com/@emotion/weak-memoize/-/weak-memoize-0.2.4.tgz#622a72bebd1e3f48d921563b4b60a762295a81fc"
   integrity sha512-6PYY5DVdAY1ifaQW6XYTnOMihmBVT27elqSjEoodchsGjzYlEsTQMcEhSud99kVawatyTZRTiVkJ/c6lwbQ7nA==
 
+"@entur/icons@^0.4.2":
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/@entur/icons/-/icons-0.4.2.tgz#79f81204a9da14c164a5e4440390cdc3b18b7230"
+  integrity sha512-4M0nvJo5mFZSM3ub9KdspEjowfdpsOHQJ/pjB7iKVvR2SH4KJTMOMRXaugkPUC8ZoB5L8z9thsABsEfYH4wnNQ==
+
 "@evocateur/libnpmaccess@^3.1.2":
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/@evocateur/libnpmaccess/-/libnpmaccess-3.1.2.tgz#ecf7f6ce6b004e9f942b098d92200be4a4b1c845"

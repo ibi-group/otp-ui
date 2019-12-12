@@ -1,5 +1,5 @@
 {
-  "name": "sample",
+  "name": "@opentripplanner/pulse-dot",
   "version": "0.0.1",
   "description": "Sample Component",
   "keywords": [
@@ -28,5 +28,8 @@
   },
   "bugs": {
     "url": "https://github.com/TriMetPDX/otp-ui/issues"
+  },
+  "dependencies": {
+    "@entur/icons": "^0.4.2"
   }
 }
