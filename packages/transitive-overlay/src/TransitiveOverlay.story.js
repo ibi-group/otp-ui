@@ -25,6 +25,8 @@ const walkOnlyItinerary = require("@opentripplanner/itinerary-body/src/__mocks__
 const walkTransitWalkItinerary = require("@opentripplanner/itinerary-body/src/__mocks__/itineraries/walk-transit-walk.json");
 const walkTransitWalkItineraryNoIntermediateStops = require("@opentripplanner/itinerary-body/src/__mocks__/itineraries/walk-transit-walk-no-intermediate-stops.json");
 const walkTransitWalkTransitWalkItinerary = require("@opentripplanner/itinerary-body/src/__mocks__/itineraries/walk-transit-walk-transit-walk.json");
+const erraticDisplay = require("@opentripplanner/itinerary-body/src/__mocks__/itineraries/itinerary-causing-erratic-display.json");
+const erraticDisplay2 = require("@opentripplanner/itinerary-body/src/__mocks__/itineraries/itinerary-causing-erratic-display2.json");
 
 const companies = [
   {
@@ -266,6 +268,34 @@ storiesOf("TransitiveOverlay", module)
           tncTransitTncItinerary,
           companies
         )}
+        visible
+      />
+    </BaseMap>
+  ))
+  .add("TransitiveOverlay with erratic display", () => (
+    <BaseMap center={[41.41259887279844, -73.6680892544424]} zoom={12}>
+      <EndpointsOverlay
+        fromLocation={getFromLocation(erraticDisplay)}
+        setLocation={setLocation}
+        toLocation={getToLocation(erraticDisplay)}
+        visible
+      />
+      <TransitiveOverlay
+        transitiveData={itineraryToTransitive(erraticDisplay, companies)}
+        visible
+      />
+    </BaseMap>
+  ))
+  .add("TransitiveOverlay with erratic display 2", () => (
+    <BaseMap center={[41.41259887279844, -73.6680892544424]} zoom={12}>
+      <EndpointsOverlay
+        fromLocation={getFromLocation(erraticDisplay2)}
+        setLocation={setLocation}
+        toLocation={getToLocation(erraticDisplay2)}
+        visible
+      />
+      <TransitiveOverlay
+        transitiveData={itineraryToTransitive(erraticDisplay2, companies)}
         visible
       />
     </BaseMap>

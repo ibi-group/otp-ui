@@ -1,0 +1,342 @@
+{
+  "duration": 1320,
+  "startTime": 1591635505000,
+  "endTime": 1591636825000,
+  "walkTime": 718,
+  "transitTime": 600,
+  "waitingTime": 2,
+  "walkDistance": 913.251522381944,
+  "walkLimitExceeded": false,
+  "elevationLost": 0.0,
+  "elevationGained": 0.0,
+  "transfers": 0,
+  "legs": [
+    {
+      "startTime": 1591635505000,
+      "endTime": 1591635599000,
+      "departureDelay": 0,
+      "arrivalDelay": 0,
+      "realTime": false,
+      "distance": 111.861,
+      "pathway": false,
+      "mode": "WALK",
+      "route": "",
+      "agencyTimeZoneOffset": -14400000,
+      "interlineWithPreviousLeg": false,
+      "from": {
+        "name": "1081 Stoneleigh Ave, Carmel, NY, 10512, USA",
+        "lon": -73.6680892544424,
+        "lat": 41.41259887279844,
+        "departure": 1591635505000,
+        "orig": "1081 Stoneleigh Ave, Carmel, NY, 10512, USA",
+        "vertexType": "NORMAL"
+      },
+      "to": {
+        "name": "Putnam Plaza",
+        "stopId": "50:PT_113581",
+        "stopCode": "113581",
+        "lon": -73.668443,
+        "lat": 41.413419,
+        "arrival": 1591635599000,
+        "departure": 1591635600000,
+        "stopIndex": 0,
+        "stopSequence": 0,
+        "vertexType": "TRANSIT"
+      },
+      "legGeometry": {
+        "points": "qkw{Fjhs`MMQSV[`@SPKJOHOBO@MCKG",
+        "length": 11
+      },
+      "rentedBike": false,
+      "rentedCar": false,
+      "rentedVehicle": false,
+      "hailedCar": false,
+      "transitLeg": false,
+      "duration": 94.0,
+      "intermediateStops": [],
+      "steps": [
+        {
+          "distance": 10.71,
+          "relativeDirection": "DEPART",
+          "streetName": "service road",
+          "absoluteDirection": "NORTHEAST",
+          "stayOn": false,
+          "area": false,
+          "bogusName": true,
+          "lon": -73.66805440231933,
+          "lat": 41.412572454128835,
+          "elevation": []
+        },
+        {
+          "distance": 93.62700000000001,
+          "relativeDirection": "LEFT",
+          "streetName": "Stoneleigh Avenue",
+          "absoluteDirection": "NORTHWEST",
+          "stayOn": false,
+          "area": false,
+          "bogusName": false,
+          "lon": -73.66796310000001,
+          "lat": 41.412640200000006,
+          "elevation": []
+        },
+        {
+          "distance": 7.524,
+          "relativeDirection": "SLIGHTLY_RIGHT",
+          "streetName": "service road",
+          "absoluteDirection": "NORTHEAST",
+          "stayOn": false,
+          "area": false,
+          "bogusName": true,
+          "lon": -73.66846670000001,
+          "lat": 41.413352200000006,
+          "elevation": []
+        }
+      ]
+    },
+    {
+      "startTime": 1591635600000,
+      "endTime": 1591636200000,
+      "departureDelay": 0,
+      "arrivalDelay": 0,
+      "realTime": false,
+      "distance": 4750.119860859695,
+      "pathway": false,
+      "mode": "BUS",
+      "route": "5",
+      "agencyName": "PART Putnam Area Rapid Transit",
+      "agencyUrl": "http://www.putnamcountyny.com/PART/",
+      "agencyTimeZoneOffset": -14400000,
+      "routeColor": "D17C63",
+      "routeType": 3,
+      "routeId": "50:PART5",
+      "routeTextColor": "FFFFFF",
+      "interlineWithPreviousLeg": false,
+      "agencyId": "PART-Putnam-ny-us",
+      "tripId": "50:PART5-06-06",
+      "serviceDate": "20200608",
+      "from": {
+        "name": "Putnam Plaza",
+        "stopId": "50:PT_113581",
+        "stopCode": "113581",
+        "lon": -73.668443,
+        "lat": 41.413419,
+        "arrival": 1591635599000,
+        "departure": 1591635600000,
+        "stopIndex": 0,
+        "stopSequence": 0,
+        "vertexType": "TRANSIT"
+      },
+      "to": {
+        "name": "Carmel Plaza/Shoprite",
+        "stopId": "50:81c83883",
+        "lon": -73.680507,
+        "lat": 41.435709,
+        "arrival": 1591636200000,
+        "departure": 1591636201000,
+        "stopIndex": 7,
+        "stopSequence": 7,
+        "vertexType": "TRANSIT"
+      },
+      "legGeometry": {
+        "points": "ypw{Fxjs`M?CJFjAsBt@eBf@yAn@iC\\uBXuCL}C@{@A}BC_AM}BWwB_@sBc@gBNs@L_AhCE@k@??C??[Ow@Ug@Mm@Ae@YFw@xFM~@Or@b@fB^rBVvBL|BB~@@|BAz@M|CYtC]tBo@hCg@xAu@dBkArBgA~AiBnBR`@^hAVSTC^UlAgA?K?AQ]gC`Ce@yA_VtUqAfAeEvCaBnAyA`BoAdBRfQB?@@pGhAEu@]aBGc@AWDs@LkB?AMlBEr@@VFb@\\`BDt@wGkAAfBmG}Ba@Ik@?@Y?@AVwGd@mJz@cEXA@cEX_E^yEt@}A\\qBl@qEjBgA`@eN`DSIUSQu@kATa@{C_Bb@A@",
+        "length": 109
+      },
+      "interStopGeometry": [
+        {
+          "points": "ypw{Fxjs`M?CJFjAsBt@eBf@yAn@iC\\uBXuCL}C@{@A}BC_AM}BWwB_@sBc@gBNs@L_AhCE@k@",
+          "length": 21
+        },
+        {
+          "points": "qew{Fbtq`M??C??[Ow@Ug@Mm@Ae@YFw@xFM~@Or@b@fB^rBVvBL|BB~@@|BAz@M|CYtC]tBo@hCg@xAu@dBkArBgA~AiBnBR`@^hAVSTC^UlAgA?K?A",
+          "length": 36
+        },
+        {
+          "points": "oow{Ftps`MQ]gC`Ce@yA_VtUqAfAeEvCaBnAyA`BoAdBRfQB?@@",
+          "length": 13
+        },
+        { "points": "y|x{Fviu`MpGhAEu@]aBGc@AWDs@LkB", "length": 8 },
+        {
+          "points": "aux{Fl`u`M?AMlBEr@@VFb@\\`BDt@wGkAAfBmG}Ba@Ik@?@Y?@",
+          "length": 15
+        },
+        { "points": "{gy{F|gu`MAVwGd@mJz@cEX", "length": 5 },
+        {
+          "points": "gbz{Fplu`MA@cEX_E^yEt@}A\\qBl@qEjBgA`@eN`DSIUSQu@kATa@{C_Bb@A@",
+          "length": 17
+        }
+      ],
+      "routeShortName": "5",
+      "routeLongName": "Carmel, Kent, Lake Carmel",
+      "rentedBike": false,
+      "rentedCar": false,
+      "rentedVehicle": false,
+      "hailedCar": false,
+      "transitLeg": true,
+      "duration": 600.0,
+      "intermediateStops": [
+        {
+          "name": "O/C DSS (Call 845-878-RIDE)",
+          "stopId": "50:113569OC",
+          "lon": -73.659693,
+          "lat": 41.411619,
+          "arrival": 1591635600000,
+          "departure": 1591635600000,
+          "stopIndex": 1,
+          "stopSequence": 1,
+          "vertexType": "TRANSIT"
+        },
+        {
+          "name": "O/C CVS Carmel (Call 845-878-RIDE)",
+          "stopId": "50:89ih",
+          "lon": -73.669206,
+          "lat": 41.412964,
+          "arrival": 1591635600000,
+          "departure": 1591635600000,
+          "stopIndex": 2,
+          "stopSequence": 2,
+          "vertexType": "TRANSIT"
+        },
+        {
+          "name": "O/C Church St & Seminary Hill Rd (Call 845-878-RIDE)",
+          "stopId": "50:ve0q",
+          "lon": -73.678511,
+          "lat": 41.420466,
+          "arrival": 1591635600000,
+          "departure": 1591635600000,
+          "stopIndex": 3,
+          "stopSequence": 3,
+          "vertexType": "TRANSIT"
+        },
+        {
+          "name": "O/C Gleneida Court (Call 845-878-RIDE)",
+          "stopId": "50:96a6OC",
+          "lon": -73.677009,
+          "lat": 41.419219,
+          "arrival": 1591635600000,
+          "departure": 1591635600000,
+          "stopIndex": 4,
+          "stopSequence": 4,
+          "vertexType": "TRANSIT"
+        },
+        {
+          "name": "Rte. 6 & Route 52",
+          "stopId": "50:PT_113597",
+          "stopCode": "113597",
+          "lon": -73.678202,
+          "lat": 41.422309,
+          "arrival": 1591635720000,
+          "departure": 1591635720000,
+          "stopIndex": 5,
+          "stopSequence": 5,
+          "vertexType": "TRANSIT"
+        },
+        {
+          "name": "County Courthouse",
+          "stopId": "50:d386526",
+          "lon": -73.678962,
+          "lat": 41.426452,
+          "arrival": 1591635900000,
+          "departure": 1591635900000,
+          "stopIndex": 6,
+          "stopSequence": 6,
+          "vertexType": "TRANSIT"
+        }
+      ],
+      "steps": []
+    },
+    {
+      "startTime": 1591636201000,
+      "endTime": 1591636825000,
+      "departureDelay": 0,
+      "arrivalDelay": 0,
+      "realTime": false,
+      "distance": 801.145,
+      "pathway": false,
+      "mode": "WALK",
+      "route": "",
+      "agencyTimeZoneOffset": -14400000,
+      "interlineWithPreviousLeg": false,
+      "from": {
+        "name": "Carmel Plaza/Shoprite",
+        "stopId": "50:81c83883",
+        "lon": -73.680507,
+        "lat": 41.435709,
+        "arrival": 1591636200000,
+        "departure": 1591636201000,
+        "stopIndex": 7,
+        "stopSequence": 7,
+        "vertexType": "TRANSIT"
+      },
+      "to": {
+        "name": "253 RT-52, Carmel, NY, 10512, USA",
+        "lon": -73.6811201275936,
+        "lat": 41.440649864891455,
+        "arrival": 1591636825000,
+        "orig": "253 RT-52, Carmel, NY, 10512, USA",
+        "vertexType": "NORMAL"
+      },
+      "legGeometry": {
+        "points": "c|{{Fhvu`MKB??]Hc@J_@JVxCnAWLfALPkAX_AVKBc@F_@Bc@Aw@I_@EiAOSC_AOs@Ii@Ci@?iABW?WAQCOCMEOKMMOQMUw@mAu@bA",
+        "length": 36
+      },
+      "rentedBike": false,
+      "rentedCar": false,
+      "rentedVehicle": false,
+      "hailedCar": false,
+      "transitLeg": false,
+      "duration": 624.0,
+      "intermediateStops": [],
+      "steps": [
+        {
+          "distance": 174.04500000000002,
+          "relativeDirection": "DEPART",
+          "streetName": "parking aisle",
+          "absoluteDirection": "NORTH",
+          "stayOn": false,
+          "area": false,
+          "bogusName": true,
+          "lon": -73.68052107219943,
+          "lat": 41.43570618566388,
+          "elevation": []
+        },
+        {
+          "distance": 42.339,
+          "relativeDirection": "RIGHT",
+          "streetName": "service road",
+          "absoluteDirection": "WEST",
+          "stayOn": true,
+          "area": false,
+          "bogusName": true,
+          "lon": -73.6813628,
+          "lat": 41.4357392,
+          "elevation": []
+        },
+        {
+          "distance": 543.697,
+          "relativeDirection": "HARD_RIGHT",
+          "streetName": "State Highway 52",
+          "absoluteDirection": "NORTH",
+          "stayOn": false,
+          "area": false,
+          "bogusName": false,
+          "lon": -73.68181580000001,
+          "lat": 41.435594800000004,
+          "elevation": []
+        },
+        {
+          "distance": 41.064,
+          "relativeDirection": "LEFT",
+          "streetName": "Horse Pound Road",
+          "absoluteDirection": "NORTHWEST",
+          "stayOn": false,
+          "area": false,
+          "bogusName": false,
+          "lon": -73.68102610000001,
+          "lat": 41.440212300000006,
+          "elevation": []
+        }
+      ]
+    }
+  ],
+  "tooSloped": false
+}
