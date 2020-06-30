@@ -139,8 +139,7 @@
   "lint-staged": {
     "*.{js,jsx}": [
       "eslint --ignore-pattern lib --ignore-pattern node_modules --fix",
-      "stylelint \"packages/**/*.js{,x}\" --fix",
-      "git add"
+      "stylelint \"packages/**/*.js{,x}\" --fix"
     ],
     "*.{json,md,yml}": [
       "prettier --write",
