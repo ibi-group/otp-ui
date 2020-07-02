@@ -1,3 +1,5 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-await-in-loop */
 import moment from "moment";
 import getGeocoder from "@opentripplanner/geocoder";
 import qs from "qs";
@@ -237,7 +239,8 @@ async function queryParamToLocation(value, geocoderConfig = null) {
  */
 export async function planParamsToQuery(params, config) {
   const query = {};
-  Object.keys(params).forEach(async key => {
+  // eslint-disable-next-line guard-for-in
+  for (const key in params) {
     switch (key) {
       case "fromPlace":
         query.from = await queryParamToLocation(
@@ -279,7 +282,7 @@ export async function planParamsToQuery(params, config) {
         break;
       }
     }
-  });
+  }
   return query;
 }
 

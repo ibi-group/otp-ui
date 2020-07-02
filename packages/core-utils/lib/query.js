@@ -31,6 +31,10 @@ var _time = require("./time");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+/* eslint-disable no-restricted-syntax */
+
+/* eslint-disable no-await-in-loop */
+
 /* The list of default parameters considered in the settings panel */
 const defaultParams = ["wheelchair", "maxWalkDistance", "maxWalkTime", "walkSpeed", "maxBikeDistance", "maxBikeTime", "bikeSpeed", "optimize", "optimizeBike", "maxEScooterDistance", "watts"];
 /**
@@ -226,8 +230,9 @@ async function queryParamToLocation(value, geocoderConfig = null) {
 
 
 async function planParamsToQuery(params, config) {
-  const query = {};
-  Object.keys(params).forEach(async key => {
+  const query = {}; // eslint-disable-next-line guard-for-in
+
+  for (const key in params) {
     switch (key) {
       case "fromPlace":
         query.from = await queryParamToLocation(params.fromPlace, config.geocoder);
@@ -262,7 +267,8 @@ async function planParamsToQuery(params, config) {
           break;
         }
     }
-  });
+  }
+
   return query;
 }
 /**
