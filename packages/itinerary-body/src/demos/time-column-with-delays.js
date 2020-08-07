@@ -28,40 +28,54 @@ export default function TimeColumnWithDelays({
     const originalFormattedTime =
       originalTime && formatTime(originalTime, timeOptions);
 
-    // Rendering details to be discussed. Following OBA's color convention:
-    // - Early -> red (warns people they can miss their ride)
-    // - Delay -> blue
-    // - On-time -> green
-    // On-time thresholds: to be discussed.
-    const isOnTime = delay >= -60 && delay <= 120;
+    // TODO: refine on-time thresholds.
+    // const isOnTime = delay >= -60 && delay <= 120;
+    const isOnTime = delay === 0;
 
+    // Reusing stop viewer colors.
     let color;
     let statusText;
     if (isOnTime) {
-      color = "#009900";
-      statusText = "On time";
+      color = "#5cb85c";
+      statusText = "on time";
     } else if (delay < 0) {
-      color = "#ff0000";
-      statusText = "Early";
+      color = "#337ab7";
+      statusText = "early";
     } else if (delay > 0) {
-      color = "#0000ff";
-      statusText = "Delayed";
+      color = "#d9534f";
+      statusText = "late";
     }
 
-    // Absolute delay in ronded minutes, for display
+    // Absolute delay in rounded minutes, for display purposes.
     const delayInMinutes = Math.abs(
       Math.round((isDestination ? leg.arrivalDelay : leg.departureDelay) / 60)
     );
 
-    return (
-      <div>
+    let renderedTime;
+    if (!isOnTime) {
+      // If the transit vehicle is not on time, strike the original scheduled time
+      // and display the updated time underneath.
+      renderedTime = (
         <div style={{ lineHeight: "1em" }}>
-          {/* Strike the original scheduled time */}
-          <div style={{ textDecoration: "line-through" }}>
+          {" "}
+          {/* styled */}
+          <div
+            style={{
+              textDecoration: "line-through #000000"
+            }}
+          >
             {originalFormattedTime}
           </div>
-          <div style={{ color }}>{formattedTime}</div>
+          <div style={{ color }}>{formattedTime}</div> {/* styled */}
         </div>
+      );
+    } else {
+      renderedTime = <div style={{ color }}>{formattedTime}</div>; // styled
+    }
+
+    return (
+      <div>
+        <div>{renderedTime}</div>
         <div
           style={{
             color,
@@ -70,6 +84,8 @@ export default function TimeColumnWithDelays({
             marginTop: "4px"
           }}
         >
+          {" "}
+          {/* styled except color */}
           {statusText}
           <br />
           {!isOnTime && <>{delayInMinutes}&nbsp;min</>}
@@ -83,7 +99,11 @@ export default function TimeColumnWithDelays({
       <div>{formattedTime}</div>
       {/* Add the scheduled mention for transit legs only. */}
       {isTransitLeg && (
-        <div style={{ fontSize: "80%", lineHeight: "1em" }}>Scheduled</div>
+        <div style={{ fontSize: "80%", lineHeight: "1em", marginTop: "4px" }}>
+          {" "}
+          {/* styled */}
+          Scheduled
+        </div>
       )}
     </>
   );

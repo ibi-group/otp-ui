@@ -132,8 +132,8 @@
     {
       "startTime": 1573688770000,
       "endTime": 1573688985000,
-      "departureDelay": 94,
-      "arrivalDelay": -40,
+      "departureDelay": 0,
+      "arrivalDelay": 0,
       "realTime": true,
       "distance": 855.2914091936907,
       "pathway": false,

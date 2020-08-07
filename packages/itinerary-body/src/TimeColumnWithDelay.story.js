@@ -20,7 +20,7 @@ const config = require("./__mocks__/config.json");
 const walkTransitWalkItinerary = require("./__mocks__/itineraries/walk-transit-walk-fdot.json");
 const walkTransitWalkRealtimeDelayedItinerary = require("./__mocks__/itineraries/walk-transit-walk-fdot-realtime-delayed.json");
 const walkTransitWalkRealtimeEarlyItinerary = require("./__mocks__/itineraries/walk-transit-walk-fdot-realtime-early.json");
-const walkTransitWalkRealtimeNearOntimeItinerary = require("./__mocks__/itineraries/walk-transit-walk-fdot-realtime-near-ontime.json");
+const walkTransitWalkRealtimeOntimeItinerary = require("./__mocks__/itineraries/walk-transit-walk-fdot-realtime-ontime.json");
 
 const OtpRRItineraryBodyWrapper = ({ itinerary }) => (
   <OtpRRStyledItineraryBody
@@ -63,8 +63,8 @@ storiesOf("TimeColumnWithDelay", module)
       itinerary={walkTransitWalkRealtimeEarlyItinerary}
     />
   ))
-  .add("Realtime data with, near on-time", () => (
+  .add("Realtime data, on-time", () => (
     <OtpRRItineraryBodyWrapper
-      itinerary={walkTransitWalkRealtimeNearOntimeItinerary}
+      itinerary={walkTransitWalkRealtimeOntimeItinerary}
     />
   ));
