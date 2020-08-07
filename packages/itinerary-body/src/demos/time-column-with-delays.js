@@ -6,6 +6,73 @@ import {
 import { formatTime } from "@opentripplanner/core-utils/lib/time";
 import PropTypes from "prop-types";
 import React from "react";
+import styled from "styled-components";
+
+const StatusText = styled.div`
+  background-color: #bbb;
+  color: #fff;
+  font-size: 80%;
+  line-height: 1em;
+  padding: 2px;
+  text-align: center;
+  text-transform: uppercase;
+`;
+const TimeText = styled.div``;
+
+const TimeStruck = styled.div`
+  text-decoration: line-through;
+`;
+
+const TimeBlock = styled.div`
+  line-height: 1em;
+  margin-bottom: 4px;
+`;
+
+const TimeColumnBase = styled.div``;
+
+// Reusing stop viewer colors.
+/*
+const TimeColumnOnTime = styled(TimeColumnBase)`
+  ${TimeText}, ${StatusText} {
+    color: #5cb85c;
+  }
+`;
+const TimeColumnEarly = styled(TimeColumnBase)`
+  ${TimeText}, ${StatusText} {
+    color: #337ab7;
+  }
+`;
+const TimeColumnLate = styled(TimeColumnBase)`
+  ${TimeText}, ${StatusText} {
+    color: #d9534f;
+  }
+`;
+*/
+
+const TimeColumnOnTime = styled(TimeColumnBase)`
+  ${TimeText} {
+    color: #5cb85c;
+  }
+  ${StatusText} {
+    background-color: #5cb85c;
+  }
+`;
+const TimeColumnEarly = styled(TimeColumnBase)`
+  ${TimeText} {
+    color: #337ab7;
+  }
+  ${StatusText} {
+    background-color: #337ab7;
+  }
+`;
+const TimeColumnLate = styled(TimeColumnBase)`
+  ${TimeText} {
+    color: #d9534f;
+  }
+  ${StatusText} {
+    background-color: #d9534f;
+  }
+`;
 
 /**
  * This component displays the scheduled departure/arrival time for a leg,
@@ -32,18 +99,17 @@ export default function TimeColumnWithDelays({
     // const isOnTime = delay >= -60 && delay <= 120;
     const isOnTime = delay === 0;
 
-    // Reusing stop viewer colors.
-    let color;
     let statusText;
+    let TimeColumn = TimeColumnBase;
     if (isOnTime) {
-      color = "#5cb85c";
       statusText = "on time";
+      TimeColumn = TimeColumnOnTime;
     } else if (delay < 0) {
-      color = "#337ab7";
       statusText = "early";
+      TimeColumn = TimeColumnEarly;
     } else if (delay > 0) {
-      color = "#d9534f";
       statusText = "late";
+      TimeColumn = TimeColumnLate;
     }
 
     // Absolute delay in rounded minutes, for display purposes.
@@ -56,55 +122,33 @@ export default function TimeColumnWithDelays({
       // If the transit vehicle is not on time, strike the original scheduled time
       // and display the updated time underneath.
       renderedTime = (
-        <div style={{ lineHeight: "1em" }}>
-          {" "}
-          {/* styled */}
-          <div
-            style={{
-              textDecoration: "line-through #000000"
-            }}
-          >
-            {originalFormattedTime}
-          </div>
-          <div style={{ color }}>{formattedTime}</div> {/* styled */}
-        </div>
+        <TimeBlock>
+          <TimeStruck>{originalFormattedTime}</TimeStruck>
+          <TimeText>{formattedTime}</TimeText>
+        </TimeBlock>
       );
     } else {
-      renderedTime = <div style={{ color }}>{formattedTime}</div>; // styled
+      renderedTime = <TimeText>{formattedTime}</TimeText>;
     }
 
     return (
-      <div>
-        <div>{renderedTime}</div>
-        <div
-          style={{
-            color,
-            fontSize: "80%",
-            lineHeight: "1em",
-            marginTop: "4px"
-          }}
-        >
-          {" "}
-          {/* styled except color */}
-          {statusText}
-          <br />
+      <TimeColumn>
+        {renderedTime}
+        <StatusText>
           {!isOnTime && <>{delayInMinutes}&nbsp;min</>}
-        </div>
-      </div>
+          {"\n"}
+          {statusText}
+        </StatusText>
+      </TimeColumn>
     );
   }
 
+  // Non-real-time leg.
   return (
     <>
-      <div>{formattedTime}</div>
+      <TimeText>{formattedTime}</TimeText>
       {/* Add the scheduled mention for transit legs only. */}
-      {isTransitLeg && (
-        <div style={{ fontSize: "80%", lineHeight: "1em", marginTop: "4px" }}>
-          {" "}
-          {/* styled */}
-          Scheduled
-        </div>
-      )}
+      {isTransitLeg && <StatusText>scheduled</StatusText>}
     </>
   );
 }

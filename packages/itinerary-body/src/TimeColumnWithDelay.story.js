@@ -1,3 +1,4 @@
+import { getTimeZoneOffset } from "@opentripplanner/core-utils/lib/itinerary";
 import { itineraryType } from "@opentripplanner/core-utils/lib/types";
 import ClassicLegIcon from "@opentripplanner/icons/lib/classic-leg-icon";
 import React from "react";
@@ -22,26 +23,34 @@ const walkTransitWalkRealtimeDelayedItinerary = require("./__mocks__/itineraries
 const walkTransitWalkRealtimeEarlyItinerary = require("./__mocks__/itineraries/walk-transit-walk-fdot-realtime-early.json");
 const walkTransitWalkRealtimeOntimeItinerary = require("./__mocks__/itineraries/walk-transit-walk-fdot-realtime-ontime.json");
 
-const OtpRRItineraryBodyWrapper = ({ itinerary }) => (
-  <OtpRRStyledItineraryBody
-    config={config}
-    itinerary={itinerary}
-    LegIcon={ClassicLegIcon}
-    LineColumnContent={OtpRRLineColumnContent}
-    PlaceName={OtpRRPlaceName}
-    RouteDescription={OtpRRRouteDescription}
-    routingType="ITINERARY"
-    showAgencyInfo
-    showLegIcon
-    showMapButtonColumn={false}
-    showViewTripButton
-    styledItinerary="otp-rr"
-    TimeColumnContent={TimeColumnWithDelays}
-    toRouteAbbreviation={r => r.toString().substr(0, 2)}
-    TransitLegSubheader={WrappedOtpRRTransitLegSubheader}
-    TransitLegSummary={DefaultTransitLegSummary}
-  />
-);
+const OtpRRItineraryBodyWrapper = ({ itinerary }) => {
+  const timeOptions = {
+    format: config.dateTime.timeFormat,
+    offset: getTimeZoneOffset(itinerary)
+  };
+
+  return (
+    <OtpRRStyledItineraryBody
+      config={config}
+      itinerary={itinerary}
+      LegIcon={ClassicLegIcon}
+      LineColumnContent={OtpRRLineColumnContent}
+      PlaceName={OtpRRPlaceName}
+      RouteDescription={OtpRRRouteDescription}
+      routingType="ITINERARY"
+      showAgencyInfo
+      showLegIcon
+      showMapButtonColumn={false}
+      showViewTripButton
+      styledItinerary="otp-rr"
+      TimeColumnContent={TimeColumnWithDelays}
+      timeOptions={timeOptions}
+      toRouteAbbreviation={r => r.toString().substr(0, 2)}
+      TransitLegSubheader={WrappedOtpRRTransitLegSubheader}
+      TransitLegSummary={DefaultTransitLegSummary}
+    />
+  );
+};
 
 OtpRRItineraryBodyWrapper.propTypes = {
   itinerary: itineraryType.isRequired
