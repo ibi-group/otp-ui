@@ -184,6 +184,31 @@ OtpRRItineraryBodyWrapper.defaultProps = {
 storiesOf("ItineraryBody", module)
   .addDecorator(withA11y)
   .addDecorator(withInfo)
+  .add("otp-rr Route Description", () => (
+    <>
+      <div style={{ width: "100px" }}>
+        <div>100px</div>
+        <OtpRRRouteDescription
+          leg={fareComponentsItinerary.legs[1]}
+          LegIcon={ClassicLegIcon}
+        />
+      </div>
+      <div style={{ width: "300px" }}>
+        <div>300px</div>
+        <OtpRRRouteDescription
+          leg={fareComponentsItinerary.legs[1]}
+          LegIcon={ClassicLegIcon}
+        />
+      </div>
+      <div style={{ width: "500px" }}>
+        <div>500px</div>
+        <OtpRRRouteDescription
+          leg={fareComponentsItinerary.legs[1]}
+          LegIcon={ClassicLegIcon}
+        />
+      </div>
+    </>
+  ))
   .add("ItineraryBody with walk-only itinerary", () => (
     <ItineraryBodyDefaultsWrapper itinerary={walkOnlyItinerary} />
   ))

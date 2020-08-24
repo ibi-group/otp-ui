@@ -278,25 +278,34 @@ export const LegClickable = styled(TransparentButton)`
   padding: 0;
   text-align: center;
   line-height: 31px;
-  /* line-height: 18px; */
 `;
 
 export const LegDescription = styled.div`
-  display: table;
+  align-content: space-between;
+  align-items: center;
+  display: flex;
+  line-height: 1.5;
+`;
 
-  > div {
-    display: table-cell;
-  }
+export const LegDescriptionHeadsign = styled.span`
+  font-weight: 500;
+  white-space: nowrap;
 `;
 
 export const LegDescriptionHeadsignPrefix = styled.span`
   font-weight: 200;
 `;
 
+export const LegDescriptionLongContainer = styled.div`
+  flex-grow: 3;
+  > div {
+    display: inline-block;
+  }
+`;
+
 export const LegDescriptionRouteLongName = styled.div`
-  font-size: 13px;
   font-weight: 500;
-  line-height: 16px;
+  white-space: nowrap;
 `;
 
 export const LegDescriptionRouteShortName = styled.div`
@@ -306,7 +315,7 @@ export const LegDescriptionRouteShortName = styled.div`
 
 export const LegDescriptionForTransit = styled(LegDescription)`
   color: rgb(153, 153, 153);
-  margin-top: 5px;
+  padding: 4px 0px;
 `;
 
 export const LegIconContainer = styled.div`

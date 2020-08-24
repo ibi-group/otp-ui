@@ -745,7 +745,7 @@
       "routeTextColor": "ffffff",
       "interlineWithPreviousLeg": false,
       "tripBlockId": "MCOB-DO:DO25New:0:Weekday:3:20MAR:41055:12345",
-      "headsign": "Edmonds",
+      "headsign": "Seaway Transit Center",
       "agencyId": "29",
       "tripId": "1:8617811__MCOB-DO:DO25New:0:Weekday:3:20MAR:41055:12345",
       "serviceDate": "20200820",
@@ -789,8 +789,8 @@
           "length": 16
         }
       ],
-      "routeShortName": "116",
-      "routeLongName": "Silver Firs - Edmonds",
+      "routeShortName": "Swift Green",
+      "routeLongName": "Seaway - Canyon Park",
       "rentedBike": false,
       "rentedCar": false,
       "rentedVehicle": false,
@@ -956,7 +956,7 @@
           "length": 178
         }
       ],
-      "routeShortName": "512",
+      "routeShortName": "Very long route short  dfoansdfo asdfoi",
       "routeLongName": "Everett - Seattle",
       "rentedBike": false,
       "rentedCar": false,

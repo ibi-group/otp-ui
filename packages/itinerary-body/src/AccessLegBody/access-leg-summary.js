@@ -16,6 +16,11 @@ export default function AccessLegSummary({
   onSummaryClick,
   showLegIcon
 }) {
+  const parts = [];
+  parts.push(getLegModeLabel(leg));
+  if (leg.distance > 0) parts.push(humanizeDistanceString(leg.distance));
+  parts.push("to");
+  parts.push(getPlaceName(leg.to, config.companies));
   return (
     <Styled.LegClickable onClick={onSummaryClick}>
       {showLegIcon && (
@@ -25,13 +30,7 @@ export default function AccessLegSummary({
       )}
 
       {/* Leg description, e.g. "Walk 0.5 mi to..." */}
-      <Styled.LegDescription>
-        {getLegModeLabel(leg)}{" "}
-        {leg.distance > 0 && (
-          <span> {humanizeDistanceString(leg.distance)}</span>
-        )}
-        {` to ${getPlaceName(leg.to, config.companies)}`}
-      </Styled.LegDescription>
+      <Styled.LegDescription>{parts.join(" ")}</Styled.LegDescription>
     </Styled.LegClickable>
   );
 }

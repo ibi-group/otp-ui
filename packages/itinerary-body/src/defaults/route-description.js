@@ -8,11 +8,9 @@ export default function RouteDescription({ leg }) {
   return (
     <Styled.LegDescriptionForTransit>
       {routeShortName && (
-        <div>
-          <Styled.LegDescriptionRouteShortName>
-            {routeShortName}
-          </Styled.LegDescriptionRouteShortName>
-        </div>
+        <Styled.LegDescriptionRouteShortName title={routeShortName}>
+          {routeShortName}
+        </Styled.LegDescriptionRouteShortName>
       )}
       <Styled.LegDescriptionRouteLongName>
         {routeLongName}

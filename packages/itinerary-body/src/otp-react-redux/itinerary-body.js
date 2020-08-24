@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-import ItineraryBody from "..";
-import * as ItineraryBodyClasses from "../styled";
+import ItineraryBody from "../index";
+import * as Styled from "../styled";
 
 const StyledItineraryBody = styled(ItineraryBody)`
   font-size: 16px;
@@ -9,10 +9,9 @@ const StyledItineraryBody = styled(ItineraryBody)`
   * {
     box-sizing: border-box;
     font-family: Hind, sans-serif;
-    vertical-align: middle;
   }
 
-  ${ItineraryBodyClasses.DetailsColumn} {
+  ${Styled.DetailsColumn} {
     border: 0;
     display: table-cell;
     font-size: 13px;
@@ -21,12 +20,12 @@ const StyledItineraryBody = styled(ItineraryBody)`
     transform: inherit;
   }
 
-  ${ItineraryBodyClasses.InterlineDot} {
+  ${Styled.InterlineDot} {
     margin-left: -18px;
     margin-right: 3px;
   }
 
-  ${ItineraryBodyClasses.LegDescriptionRouteShortName} {
+  ${Styled.LegDescriptionRouteShortName} {
     background-color: rgb(15, 106, 172);
     border-color: white;
     border-image: initial;
@@ -43,10 +42,12 @@ const StyledItineraryBody = styled(ItineraryBody)`
     margin-right: 8px;
     min-width: 24px;
     padding: 2px 3px;
-    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
-  ${ItineraryBodyClasses.LineColumn} {
+  ${Styled.LineColumn} {
     display: table-cell;
     max-width: 20px;
     width: 20px;
@@ -54,7 +55,7 @@ const StyledItineraryBody = styled(ItineraryBody)`
     position: relative;
   }
 
-  ${ItineraryBodyClasses.PlaceHeader} {
+  ${Styled.PlaceHeader} {
     color: #000;
     font-size: 18px;
     font-weight: 500;
@@ -62,21 +63,21 @@ const StyledItineraryBody = styled(ItineraryBody)`
     padding-left: 4px;
   }
 
-  ${ItineraryBodyClasses.PlaceName} {
+  ${Styled.PlaceName} {
     height: inherit;
     white-space: normal;
   }
 
-  ${ItineraryBodyClasses.PlaceRowWrapper} {
+  ${Styled.PlaceRowWrapper} {
     display: table;
     width: 100%;
   }
 
-  ${ItineraryBodyClasses.StopMarker} {
+  ${Styled.StopMarker} {
     margin-left: -17px;
   }
 
-  ${ItineraryBodyClasses.TimeColumn} {
+  ${Styled.TimeColumn} {
     color: #999;
     display: table-cell;
     font-size: 14px;

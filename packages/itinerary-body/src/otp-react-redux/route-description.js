@@ -12,22 +12,25 @@ export default function RouteDescription({ leg, LegIcon }) {
         <LegIcon leg={leg} />
       </Styled.LegIconContainer>
       {routeShortName && (
-        <Styled.LegDescriptionRouteShortName>
+        <Styled.LegDescriptionRouteShortName title={routeShortName}>
           {routeShortName}
         </Styled.LegDescriptionRouteShortName>
       )}
-      <Styled.LegDescriptionRouteLongName>
-        {routeLongName}
+      <Styled.LegDescriptionLongContainer>
+        <Styled.LegDescriptionRouteLongName>
+          {routeLongName}
+        </Styled.LegDescriptionRouteLongName>
         {headsign && (
-          <span>
-            {" "}
-            <Styled.LegDescriptionHeadsignPrefix>
-              to
-            </Styled.LegDescriptionHeadsignPrefix>{" "}
-            {headsign}
-          </span>
+          <Styled.LegDescriptionHeadsignPrefix>
+            {" to "}
+          </Styled.LegDescriptionHeadsignPrefix>
         )}
-      </Styled.LegDescriptionRouteLongName>
+        {headsign && (
+          <Styled.LegDescriptionHeadsign>
+            {headsign}
+          </Styled.LegDescriptionHeadsign>
+        )}
+      </Styled.LegDescriptionLongContainer>
     </Styled.LegDescriptionForTransit>
   );
 }
