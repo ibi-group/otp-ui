@@ -417,6 +417,7 @@ export const PlaceName = styled.div`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  flex: 1 1 auto;
 `;
 
 export const PlaceSubheader = styled.div`
