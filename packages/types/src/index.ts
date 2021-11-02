@@ -39,7 +39,7 @@ export interface LayerEntity {
   lon: number;
 }
 
-interface SymbolComponentBaseProps {
+export interface SymbolComponentBaseProps {
   entity: LayerEntity;
   zoom: number;
 }
@@ -49,7 +49,7 @@ interface SymbolComponentBaseProps {
  * ({ entity: object; zoom: number }) => Element
  * where entity must have an id attribute and contain coordinates information for placement on the map.
  */
-type SymbolComponent = React.ComponentType<SymbolComponentBaseProps>;
+export type SymbolComponent = React.ComponentType<SymbolComponentBaseProps>;
 
 /**
  * Defines which symbol to render based on a zoom level; and optionally by entity type.
@@ -166,7 +166,7 @@ export interface Config {
   transitOperators?: TransitOperator[];
 }
 
-interface FeedScopedId {
+export interface FeedScopedId {
   agencyId?: string;
   id?: string;
 }
@@ -176,12 +176,12 @@ export interface EncodedPolyline {
   points: string;
 }
 
-type ElevationData = {
+export type ElevationData = {
   first: number;
   second: number;
 }[];
 
-interface Alert {
+export interface Alert {
   alertHeaderText?: string;
   alertDescriptionText?: string;
   alertUrl?: string;
@@ -281,7 +281,7 @@ export interface Leg {
 /**
  * Describes the cost of an itinerary leg.
  */
-interface Money {
+export interface Money {
   cents: number;
   currency: {
     defaultFractionDigits: number;
@@ -294,7 +294,7 @@ interface Money {
 /**
  * Describes a fare id or route to which a fare applies.
  */
-type ApplicableId = string | FeedScopedId;
+export type ApplicableId = string | FeedScopedId;
 
 /**
  * Represents the fare component of an itinerary of an OTP plan response. See
