@@ -1,7 +1,14 @@
 import coreUtils from "@opentripplanner/core-utils";
 import PropTypes from "prop-types";
 import React from "react";
-import { FeatureGroup, MapLayer, Polyline, withLeaflet } from "react-leaflet";
+import {
+  FeatureGroup,
+  GeoJSON,
+  MapLayer,
+  Polyline,
+  withLeaflet
+} from "react-leaflet";
+import bezier from "@turf/bezier-spline";
 
 import polyline from "@mapbox/polyline";
 
@@ -54,21 +61,36 @@ class RouteViewerOverlay extends MapLayer {
     const segments = [];
     Object.values(routeData.patterns).forEach(pattern => {
       if (!pattern.geometry) return;
-      const pts = polyline.decode(pattern.geometry.points);
-      segments.push(
-        <Polyline
-          /* eslint-disable-next-line react/jsx-props-no-spreading */
-          {...path}
-          color={routeColor}
-          key={pattern.id}
-          positions={pts}
-        />
-      );
+      if (pattern.arc) {
+        // We use the stops to generate the arc, so they must be present
+        if (!pattern.stops) return;
+        // const coordinates = pattern.stops
+        //   .filter(stop => !!stop?.geometries?.geoJson?.coordinates)
+        //   .map(stop => stop.geometries.geoJson.coordinates);
+        const origin = pattern.stops[0].geometries.geoJson.coordinates;
+        const dest =
+          pattern.stops[pattern.stops.length - 1].geometries.geoJson
+            .coordinates;
+        const arc = bezier({ coordinates: [origin, dest] }, { sharpness: 0.1 });
+
+        segments.push(<GeoJSON data={[arc]} />);
+      } else {
+        const pts = polyline.decode(pattern.geometry.points);
+        segments.push(
+          <Polyline
+            /* eslint-disable-next-line react/jsx-props-no-spreading */
+            {...path}
+            color={routeColor}
+            key={pattern.id}
+            positions={pts}
+          />
+        );
+      }
     });
 
     return segments.length > 0 ? (
       <FeatureGroup>
-        <div>{segments}</div>
+        <>{segments}</>
       </FeatureGroup>
     ) : (
       <FeatureGroup />
