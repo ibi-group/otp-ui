@@ -9,8 +9,7 @@ import {
   VehicleRentalStation
 } from "@opentripplanner/types";
 import ZoomBasedMarkers from "@opentripplanner/zoom-based-markers";
-import PropTypes from "prop-types";
-import React, { Component } from "react";
+import React, { Component, ReactElement } from "react";
 import { FormattedMessage } from "react-intl";
 import {
   FeatureGroup,
@@ -24,6 +23,7 @@ import {
   HubAndFloatingBike,
   SharedBikeCircle
 } from "./DefaultMarkers";
+import { GetStationNameFunction } from "./types";
 
 // Load the default messages.
 import defaultEnglishMessages from "../i18n/en-US.yml";
@@ -43,10 +43,7 @@ interface Props {
    * rental station. This function takes two arguments of the configCompanies
    * prop and a vehicle rental station. The function must return a string.
    */
-  getStationName?: (
-    configCompanies: Company[],
-    station: VehicleRentalStation
-  ) => string;
+  getStationName?: GetStationNameFunction;
   /**
    * Provides access to the underlying leaflet object.
    */
@@ -82,6 +79,11 @@ interface Props {
 
 interface State {
   refreshTimer: number;
+  zoom: number;
+}
+
+interface SymbolWrapperProps {
+  entity: VehicleRentalStation;
   zoom: number;
 }
 
@@ -231,7 +233,10 @@ class VehicleRentalOverlay extends Component<Props, State> {
    * as a child of the specified symbol from the mapSymbols prop.
    */
   renderSymbolWithPopup = Symbol => {
-    const SymbolWrapper = ({ entity: station, zoom }) => (
+    const SymbolWrapper = ({
+      entity: station,
+      zoom
+    }: SymbolWrapperProps): ReactElement => (
       <Symbol entity={station} zoom={zoom}>
         {this.renderPopupForStation(
           station,
@@ -239,11 +244,6 @@ class VehicleRentalOverlay extends Component<Props, State> {
         )}
       </Symbol>
     );
-    SymbolWrapper.propTypes = {
-      entity: coreUtils.types.stationType.isRequired,
-      zoom: PropTypes.number.isRequired
-    };
-
     return SymbolWrapper;
   };
 
