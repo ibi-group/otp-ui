@@ -1,8 +1,10 @@
 import { divIcon } from "leaflet";
 import memoize from "lodash.memoize";
-import coreUtils from "@opentripplanner/core-utils";
-import PropTypes from "prop-types";
-import React from "react";
+import {
+  DockingRentalVehicleSymbol,
+  VehicleRentalStation
+} from "@opentripplanner/types";
+import React, { FunctionComponent, PropsWithChildren } from "react";
 import ReactDOMServer from "react-dom/server";
 import { CircleMarker, Marker } from "react-leaflet";
 
@@ -18,30 +20,28 @@ import * as Styled from "../styled";
  */
 
 // Prop types reused across components.
-const templatePropTypes = {
-  /** The children of the component. */
-  children: PropTypes.node,
+interface MarkerProps {
   /** The rental vehicle or station to render. */
-  entity: coreUtils.types.stationType.isRequired,
+  entity: VehicleRentalStation;
   /** leaflet attribute to control tabindex value for keyboaryd-only / SR users */
-  keyboard: PropTypes.bool
-};
-const templateDefaultProps = {
-  children: null,
-  keyboard: false
-};
+  keyboard?: boolean;
+}
 
 /**
  * Renders a shared bike or shared bike dock as a circle
  * with predefined colors and size.
  */
 export const SharedBikeCircle = ({
-  dockStrokeColor,
+  dockStrokeColor = null,
   fillColor = "gray",
   pixels,
   strokeColor
-}) => {
-  const GeneratedMarker = ({ children, keyboard, entity: station }) => {
+}: DockingRentalVehicleSymbol): FunctionComponent<MarkerProps> => {
+  const GeneratedMarker = ({
+    children,
+    keyboard,
+    entity: station
+  }: PropsWithChildren<MarkerProps>) => {
     let newStrokeColor = strokeColor || fillColor;
 
     if (!station.isFloatingBike) {
@@ -63,8 +63,6 @@ export const SharedBikeCircle = ({
     );
   };
 
-  GeneratedMarker.propTypes = templatePropTypes;
-  GeneratedMarker.defaultProps = templateDefaultProps;
   return GeneratedMarker;
 };
 
@@ -72,7 +70,11 @@ export const SharedBikeCircle = ({
  * A component that renders rental bike entities
  * either as a bike or a bike dock (or hub, showing spaces available).
  */
-export const HubAndFloatingBike = ({ children, keyboard, entity: station }) => {
+export const HubAndFloatingBike: FunctionComponent<MarkerProps> = ({
+  children,
+  keyboard,
+  entity: station
+}: PropsWithChildren<MarkerProps>) => {
   let icon;
   if (station.isFloatingBike) {
     icon = floatingBikeIcon;
@@ -89,8 +91,6 @@ export const HubAndFloatingBike = ({ children, keyboard, entity: station }) => {
     </Marker>
   );
 };
-HubAndFloatingBike.propTypes = templatePropTypes;
-HubAndFloatingBike.defaultProps = templateDefaultProps;
 
 /**
  * Creates and caches a leaflet element icon based on color.
@@ -111,10 +111,16 @@ const getStationMarkerByColor = memoize(color =>
  * using fixed fill color.
  * Usage: GenericMarker({ fillColor: "#F204B5" })
  */
-export const GenericMarker = ({ fillColor = "gray" }) => {
+export const GenericMarker = ({
+  fillColor = "gray"
+}: DockingRentalVehicleSymbol): FunctionComponent<MarkerProps> => {
   const markerIcon = getStationMarkerByColor(fillColor);
 
-  const GeneratedMarker = ({ children, keyboard, entity: station }) => (
+  const GeneratedMarker = ({
+    children,
+    keyboard,
+    entity: station
+  }: PropsWithChildren<MarkerProps>) => (
     <Marker
       icon={markerIcon}
       keyboard={keyboard}
@@ -123,7 +129,5 @@ export const GenericMarker = ({ fillColor = "gray" }) => {
       {children}
     </Marker>
   );
-  GeneratedMarker.propTypes = templatePropTypes;
-  GeneratedMarker.defaultProps = templateDefaultProps;
   return GeneratedMarker;
 };

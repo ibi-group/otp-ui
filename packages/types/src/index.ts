@@ -107,15 +107,35 @@ export interface TransitVehicle {
   heading?: number;
 }
 
+export interface DockingRentalVehicleSymbol {
+  dockStrokeColor?: string;
+  fillColor?: string;
+  minZoom: number;
+  pixels?: number;
+  strokeColor?: string;
+  type: string;
+}
+
 export type VehicleRentalMapOverlaySymbol =
-  | {
-      dockStrokeColor?: string;
-      fillColor?: string;
-      minZoom: number;
-      pixels?: number;
-      type: string;
-    }
+  | DockingRentalVehicleSymbol
   | ZoomBasedSymbol;
+
+/**
+ * This models data about a vehicle rental station as obtained from various
+ * vehicle rental API endpoints from OTP.
+ */
+export interface VehicleRentalStation {
+  bikesAvailable?: number;
+  id: string;
+  isFloatingBike?: boolean;
+  isFloatingCar?: boolean;
+  isFloatingVehicle?: boolean;
+  name?: string;
+  networks: string[];
+  spacesAvailable?: number;
+  x: number;
+  y: number;
+}
 
 /**
  * Represents the expected configuration of the webapp.
@@ -401,3 +421,9 @@ export interface TimeOptions {
   format?: string;
   offset?: string;
 }
+
+export type SetLocationFunction = (payload: {
+  locationType: "from" | "to";
+  location: Location;
+  reverseGeocode?: boolean;
+}) => void;
