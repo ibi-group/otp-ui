@@ -62,6 +62,8 @@ export default class HereGeocoder extends Geocoder {
     // Render the result as a single geocoder response
     const firstItem = items[0];
     return {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore FIXME: determine which field(s) should be included.
       ...point,
       name: firstItem.title,
       rawGeocodedFeature: convertHereToGeojson(firstItem)

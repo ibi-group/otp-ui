@@ -27,6 +27,8 @@ export default class NoApiGeocoder extends Geocoder {
    * Always return the lat/lon.
    */
   reverse(query: ReverseQuery): Promise<SingleOrMultiGeocoderResponse> {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore FIXME: Make sure that lat is included in the props.
     let { lat, lon } = query.point;
     lat = this.roundGPSDecimal(lat);
     lon = this.roundGPSDecimal(lon);
