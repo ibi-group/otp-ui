@@ -259,12 +259,19 @@ export const RentalBicycles = makeStory({
   stations: bikeRentalStations
 });
 
-export const RentalBicyclesVisibilityControlledByKnob = makeStory({
+export const RentalBicyclesInitiallyHidden = makeStory({
   companies: ["BIKETOWN"],
   mapSymbols: bikeMapSymbols,
   refreshVehicles: action("refresh bicycles"),
   stations: bikeRentalStations,
   visible: false
+});
+
+export const RentalBicyclesEmpty = makeStory({
+  companies: ["BIKETOWN"],
+  mapSymbols: bikeMapSymbols,
+  refreshVehicles: action("refresh bicycles"),
+  stations: []
 });
 
 export const RentalBicyclesUsingNewSymbolsProp = makeStory({

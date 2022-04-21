@@ -1,4 +1,5 @@
 import flatten from "flat";
+import { Map } from "leaflet";
 import { Styled as BaseMapStyled } from "@opentripplanner/base-map";
 import coreUtils from "@opentripplanner/core-utils";
 import FromToLocationPicker from "@opentripplanner/from-to-location-picker";
@@ -9,7 +10,7 @@ import {
   VehicleRentalStation
 } from "@opentripplanner/types";
 import ZoomBasedMarkers from "@opentripplanner/zoom-based-markers";
-import React, { Component, ReactElement } from "react";
+import React, { ChangeEvent, Component, ReactElement } from "react";
 import { FormattedMessage } from "react-intl";
 import {
   FeatureGroup,
@@ -27,6 +28,7 @@ import { GetStationNameFunction } from "./types";
 
 // Load the default messages.
 import defaultEnglishMessages from "../i18n/en-US.yml";
+import MapEvents from "./map-events";
 
 interface Props {
   /**
@@ -58,10 +60,6 @@ interface Props {
    * visible.
    */
   refreshVehicles?: () => void;
-  /**
-   * Internal method for registering overlays.
-   */
-  registerOverlay: (layer: Component) => void;
   /**
    * A callback for when a user clicks on setting this stop as either the from
    * or to location of a new search.
@@ -137,11 +135,8 @@ class VehicleRentalOverlay extends Component<Props, State> {
    * @opentripplanner/base-map package has injected to listen to zoom/position changes.
    */
   componentDidMount() {
-    const { registerOverlay, visible } = this.props;
+    const { visible } = this.props;
     if (visible) this.startRefreshing();
-    if (typeof registerOverlay === "function") {
-      registerOverlay(this);
-    }
   }
 
   componentWillUnmount() {
@@ -165,11 +160,10 @@ class VehicleRentalOverlay extends Component<Props, State> {
   };
 
   /**
-   * Listen to changes on the BaseMap's center or zoom.
-   * @param viewport The viewport data. See https://github.com/PaulLeCam/react-leaflet/blob/master/example/components/viewport.js for details.
+   * Listen to changes on the map zoom level.
    */
-  onViewportChanged = viewport => {
-    const { zoom } = viewport;
+  onZoomEnd = (e: ChangeEvent<Map>) => {
+    const zoom = e.target.getZoom();
     const { zoom: currentZoom } = this.state;
     if (zoom !== currentZoom) {
       this.setState({ zoom });
@@ -247,10 +241,6 @@ class VehicleRentalOverlay extends Component<Props, State> {
     return SymbolWrapper;
   };
 
-  createLeafletElement() {}
-
-  updateLeafletElement() {}
-
   /**
    * Render some popup html for a station. This contains custom logic for
    * displaying rental vehicles in the TriMet MOD website that might not be
@@ -323,34 +313,31 @@ class VehicleRentalOverlay extends Component<Props, State> {
       stations = []
     } = this.props;
     const { zoom } = this.state;
-    // Render an empty FeatureGroup if the rental vehicles should not be visible
-    // on the map. Otherwise previous stations may still be shown due to some
-    // react-leaflet internals, maybe? Also, do not return null because that will
-    // prevent the overlay from appearing in the layer controls.
 
-    let filteredStations = stations;
-    if (companies) {
-      filteredStations = stations.filter(
-        station =>
-          station.networks.filter(value => companies.includes(value)).length > 0
-      );
-    }
-
-    if (!filteredStations || filteredStations.length === 0) {
-      return <FeatureGroup />;
-    }
-
-    // Convert map symbols for this overlay to zoomBasedSymbolType.
-    const symbols = this.convertToZoomMarkerSymbols(mapSymbols);
+    const filteredStations = companies
+      ? stations.filter(
+          station =>
+            station.networks.filter(value => companies.includes(value)).length >
+            0
+        )
+      : stations;
 
     return (
       <FeatureGroup>
-        <ZoomBasedMarkers
-          entities={filteredStations}
-          symbols={symbols}
-          symbolTransform={this.renderSymbolWithPopup}
-          zoom={zoom}
+        <MapEvents
+          onOverlayAdded={this.onOverlayAdded}
+          onOverlayRemoved={this.onOverlayRemoved}
+          onZoomEnd={this.onZoomEnd}
         />
+        {filteredStations?.length > 0 && (
+          <ZoomBasedMarkers
+            entities={filteredStations}
+            // Convert map symbols for this overlay to zoomBasedSymbolType.
+            symbols={this.convertToZoomMarkerSymbols(mapSymbols)}
+            symbolTransform={this.renderSymbolWithPopup}
+            zoom={zoom}
+          />
+        )}
       </FeatureGroup>
     );
   }
