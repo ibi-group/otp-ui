@@ -2832,16 +2832,6 @@
   resolved "https://registry.yarnpkg.com/@open-draft/until/-/until-1.0.3.tgz#db9cc719191a62e7d9200f6e7bab21c5b848adca"
   integrity sha512-Aq58f5HiWdyDlFffbbSjAlv596h/cOnt2DO1w3DOC7OJ5EHs0hd/nycJfiu9RJbT6Yk6F1knnRRXNSpxoIVZ9Q==
 
-"@opentripplanner/base-map@^3.0.0-alpha.3":
-  version "3.0.0-alpha.3"
-  resolved "https://registry.yarnpkg.com/@opentripplanner/base-map/-/base-map-3.0.0-alpha.3.tgz#7343e7e075865cc5e31f5267d9b52ee580b55398"
-  integrity sha512-LRcRjboRuE4Q5dBaHUmKvCMSIwvPTxURm37mSk9/BAHJlszDYC4yG3Jg1N+0B6a3mAx2S8kpwNDMXrgYBfvDfA==
-  dependencies:
-    "@opentripplanner/types" "^2.0.0"
-    mapbox-gl "npm:empty-npm-package@1.0.0"
-    maplibre-gl "^2.1.9"
-    react-map-gl "^7.0.15"
-
 "@opentripplanner/core-utils@^4.5.0":
   version "4.11.5"
   resolved "https://registry.yarnpkg.com/@opentripplanner/core-utils/-/core-utils-4.11.5.tgz#ac90d443009fab02aae971d4ed6c1e0fc7da134f"
@@ -2860,6 +2850,16 @@
     prop-types "^15.7.2"
     qs "^6.9.1"
 
+"@opentripplanner/endpoints-overlay@^1.4.1":
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/@opentripplanner/endpoints-overlay/-/endpoints-overlay-1.4.4.tgz#5a1568ad8298a2286f0b7ed81e17b2cae84b71f2"
+  integrity sha512-UnHuZ8heUVHdrNg3JAbpVfYQrN31039MLyZmoYM5rXGYkHa6B+ApDv7WasFAeLPBVUoh9MRVwimbpDrfjF0xbg==
+  dependencies:
+    "@opentripplanner/core-utils" "^7.0.0"
+    "@opentripplanner/location-icon" "^1.4.0"
+    "@styled-icons/fa-solid" "^10.34.0"
+    flat "^5.0.2"
+
 "@opentripplanner/icons@1.2.2":
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/@opentripplanner/icons/-/icons-1.2.2.tgz#18c93ce34afe2d83a2f0fc6ecea85aa587d14366"
@@ -2867,11 +2867,6 @@
   dependencies:
     "@opentripplanner/core-utils" "^4.5.0"
     prop-types "^15.7.2"
-
-"@opentripplanner/types@^2.0.0":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@opentripplanner/types/-/types-2.0.1.tgz#70cef3df07b8f02bf2dd0fbc036b3bf482e669be"
-  integrity sha512-NX56DXpMqRPlzrjEnNRYkBI5QQxXkc0yR2+JlckAidTtJNRHwDqyhgNvVRKfyJPEz8+7/arCFwMXfknnisuxHw==
 
 "@pmmmwh/react-refresh-webpack-plugin@^0.5.1":
   version "0.5.4"
