@@ -8,10 +8,44 @@ import defaultEnglishMessages from "../../i18n/en-US.yml";
 // - the yaml loader for jest returns messages with flattened ids.
 const defaultMessages: Record<string, string> = flatten(defaultEnglishMessages);
 
-export default function generateModeButtonLabel(
-  key: string,
+export const generateSliderLabels = (
+  settingKey: string,
   intl: IntlShape
-): string {
+): {
+  labelLow: string;
+  labelHigh: string;
+  label: string;
+} => {
+  switch (settingKey) {
+    default:
+      return {
+        label: intl.formatMessage({
+          id: `otpUi.ModeSelector.settings.${settingKey}-label`,
+          description: `Metro Mode Selector Settings Label (${settingKey})`,
+          defaultMessage:
+            defaultMessages[`otpUi.ModeSelector.settings.${settingKey}-label`]
+        }),
+        labelLow: intl.formatMessage({
+          id: `otpUi.ModeSelector.settings.${settingKey}-labelLow`,
+          description: `Metro Mode Selector Settings Low Label (${settingKey})`,
+          defaultMessage:
+            defaultMessages[
+              `otpUi.ModeSelector.settings.${settingKey}-labelLow`
+            ]
+        }),
+        labelHigh: intl.formatMessage({
+          id: `otpUi.ModeSelector.settings.${settingKey}-labelHigh`,
+          description: `Metro Mode Selector Settings High Label (${settingKey})`,
+          defaultMessage:
+            defaultMessages[
+              `otpUi.ModeSelector.settings.${settingKey}-labelHigh`
+            ]
+        })
+      };
+  }
+};
+
+export function generateModeButtonLabel(key: string, intl: IntlShape): string {
   switch (key) {
     case "TRANSIT":
       return intl.formatMessage({

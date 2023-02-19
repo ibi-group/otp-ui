@@ -8,7 +8,7 @@ import { flatten } from "flat";
 import CheckboxSelector from "../CheckboxSelector";
 import DropdownSelector from "../DropdownSelector";
 import SliderSelector from "../SliderSelector";
-import generateModeButtonLabel from "./i18n";
+import { generateModeButtonLabel } from "./i18n";
 
 import defaultEnglishMessages from "../../i18n/en-US.yml";
 // HACK: We should flatten the messages loaded above because
