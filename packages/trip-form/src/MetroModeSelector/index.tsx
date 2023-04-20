@@ -73,8 +73,7 @@ const ModeButtonWrapper = styled.span`
   & > label:hover {
     background: #eee;
     border-color: ${activeHoverColor};
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05),
-      0 4px 10px rgba(0, 123, 255, 0.25);
+    box-shadow: rgba(0, 0, 0, 0.15) 0 0 20px;
   }
 
   & > input {
@@ -147,11 +146,11 @@ const HoverPanel = styled.div`
 const HoverInnerContainer = styled.div`
   background: #fff;
   border-radius: 4px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05), 0 4px 10px rgba(0, 123, 255, 0.25);
+  box-shadow: rgba(0, 0, 0, 0.1) 0 0 20px;
   color: #2e2e2e;
   font-size: 90%;
   font-weight: bold;
-  padding: 5px;
+  padding: 0px 10px 5px;
   pointer-events: none;
 `;
 
