@@ -335,6 +335,10 @@ export type Leg = {
   trip?: {
     arrivalStoptime?: TripStopTime;
     departureStoptime?: TripStopTime;
+    stop: {
+      gtfsId: string;
+      id: string;
+    };
     gtfsId?: string;
     id: string;
     tripHeadsign?: string;

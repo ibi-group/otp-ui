@@ -67,13 +67,15 @@ export interface TripSection {
   fromIndex: number;
   toIndex: number;
   tripId: string;
+  fromStopId?: string;
+  toStopId?: string;
 }
 
 export type SetViewedTripFunction = (tripSection: TripSection) => void;
 
 export interface TransitLegSubheaderProps {
   leg: Leg;
-  onStopClick?: ({ stopId: string }) => void;
+  onStopClick?: ({ stopId }: { stopId: string }) => void;
 }
 
 export interface TransitLegSummaryProps {
