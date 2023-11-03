@@ -1,0 +1,78 @@
+fragment AgencyFields on Agency {
+  alerts {
+    alertDescriptionText
+    alertHeaderText
+    alertUrl
+    effectiveStartDate
+    id
+  }
+  gtfsId: id
+  name
+  timezone
+  url
+}
+
+fragment StopFields on Stop {
+  alerts {
+    alertDescriptionText
+    alertHeaderText
+    alertUrl
+    effectiveStartDate
+    id
+  }
+  lat
+  lon
+  locationType
+  code
+  gtfsId: id
+}
+
+fragment FromToFields on Place {
+  lat
+  lon
+  name
+  rentalVehicle {
+    id
+    network
+  }
+  stop {
+    ...StopFields
+  }
+  vertexType
+}
+
+fragment RouteFields on Route {
+  alerts {
+    alertDescriptionText
+    alertHeaderText
+    alertUrl
+    effectiveStartDate
+    id
+  }
+  color
+  gtfsId
+  id: gtfsId
+  longName
+  shortName
+  textColor
+  type
+}
+
+fragment RideHailingEstimateFields on RideHailingEstimate {
+  arrival
+  maxPrice {
+    amount
+    currency {
+      code
+    }
+  }
+  minPrice {
+    amount
+    currency {
+      code
+    }
+  }
+  provider {
+    id
+  }
+}

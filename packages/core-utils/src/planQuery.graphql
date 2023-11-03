@@ -1,3 +1,5 @@
+#import "./fragments.graphql"
+
 query Plan(
   $arriveBy: Boolean
   $banned: InputBanned
@@ -41,17 +43,7 @@ query Plan(
       legs {
         accessibilityScore
         agency {
-          alerts {
-            alertDescriptionText
-            alertHeaderText
-            alertUrl
-            effectiveStartDate
-            id
-          }
-          gtfsId: id
-          name
-          timezone
-          url
+          ...AgencyFields
         }
         arrivalDelay
         departureDelay
@@ -85,36 +77,12 @@ query Plan(
           }
         }
         from {
-          lat
-          lon
-          name
-          rentalVehicle {
-            id
-            network
-          }
-          stop {
-            alerts {
-              alertDescriptionText
-              alertHeaderText
-              alertUrl
-              effectiveStartDate
-              id
-            }
-            code
-            gtfsId
-            id
-          }
-          vertexType
+          ...FromToFields
         }
         headsign
         interlineWithPreviousLeg
         intermediateStops {
-          lat
-          locationType
-          lon
-          name
-          stopCode: code
-          stopId: id
+          ...StopFields
         }
         legGeometry {
           length
@@ -131,38 +99,10 @@ query Plan(
         realtimeState
         rentedBike
         rideHailingEstimate {
-          arrival
-          maxPrice {
-            amount
-            currency {
-              code
-            }
-          }
-          minPrice {
-            amount
-            currency {
-              code
-            }
-          }
-          provider {
-            id
-          }
+          ...RideHailingEstimateFields
         }
         route {
-          alerts {
-            alertDescriptionText
-            alertHeaderText
-            alertUrl
-            effectiveStartDate
-            id
-          }
-          color
-          gtfsId
-          id: gtfsId
-          longName
-          shortName
-          textColor
-          type
+          ...RouteFields
         }
         startTime
         steps {
@@ -187,40 +127,19 @@ query Plan(
           streetName
         }
         to {
-          lat
-          lon
-          name
-          rentalVehicle {
-            id
-            network
-          }
-          stop {
-            alerts {
-              alertDescriptionText
-              alertHeaderText
-              alertUrl
-              effectiveStartDate
-              id
-            }
-            code
-            gtfsId
-            id
-          }
-          vertexType
+          ...FromToFields
         }
         transitLeg
         trip {
           arrivalStoptime {
             stop {
-              gtfsId
-              id
+              ...StopFields
             }
             stopPosition
           }
           departureStoptime {
             stop {
-              gtfsId
-              id
+              ...StopFields
             }
             stopPosition
           }
