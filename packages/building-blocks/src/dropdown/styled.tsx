@@ -5,7 +5,7 @@ export const DropdownButton = styled.button`
   background: #fff;
   border: 1px solid black;
   border-radius: 5px;
-  color: inherit;
+  color: #333;
   padding: 5px 7px;
   transition: all 0.1s ease-in-out;
 
