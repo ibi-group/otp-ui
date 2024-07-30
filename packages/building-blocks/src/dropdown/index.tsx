@@ -115,7 +115,7 @@ const Dropdown = ({
         style={buttonStyle}
         title={label}
       >
-        <span>{text}</span>
+        <span className="text">{text}</span>
         <span className="caret" role="presentation" />
       </DropdownButton>
       {open && (

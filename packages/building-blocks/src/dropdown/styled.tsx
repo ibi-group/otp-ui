@@ -6,8 +6,12 @@ export const DropdownButton = styled.button`
   border: 1px solid black;
   border-radius: 5px;
   color: inherit;
-  padding: 5px 7px;
+  padding: 3px 7px;
   transition: all 0.1s ease-in-out;
+
+  span.text {
+    line-height: 20px;
+  }
 
   span.caret {
     border-left: 4px solid transparent;
@@ -16,7 +20,7 @@ export const DropdownButton = styled.button`
     color: inherit;
     display: inline-block;
     height: 0;
-    margin-left: 5px;
+    margin-left: 2px;
     vertical-align: middle;
     width: 0;
   }
