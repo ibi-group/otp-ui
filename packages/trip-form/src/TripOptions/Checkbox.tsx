@@ -22,7 +22,7 @@ export default function Checkbox(
     checked: boolean;
     children: React.ReactNode | string;
     className?: string;
-    innerRef?: React.MutableRefObject<HTMLInputElement>;
+    innerRef?: React.Ref<HTMLButtonElement>;
     SimpleModeIcon?: FunctionComponent<{ mode: string }>;
   } & ButtonProps
 ): ReactElement {
