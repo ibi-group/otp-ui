@@ -5,7 +5,6 @@ import {
   MapLocationActionArg
 } from "@opentripplanner/types";
 import {
-  FormFactor,
   RentalVehicle,
   VehicleRentalStation
 } from "@opentripplanner/types/otp2";
