@@ -25,10 +25,12 @@ module.exports = {
     "yaml"
   ],
   moduleNameMapper: {
+    "^@opentripplanner/(.*)$": "<rootDir>/packages/$1/src",
     "\\.(s?css|less)$": "identity-obj-proxy",
     "\\.(pbf)$": "<rootDir>/__mocks__/file-mock.js",
     "\\.(svg)$": "<rootDir>/__mocks__/file-mock.js"
   },
+  modulePathIgnorePatterns: ["<rootDir>/packages/.*/dist/"],
   testPathIgnorePatterns: [
     "<rootDir>/packages/.*/dist/",
     "a11y",
