@@ -263,9 +263,7 @@ const VehicleRentalOverlay = ({
         >
           <StationPopup
             configCompanies={configCompanies}
-            getEntityName={
-              getStationName && ((s, cc) => getStationName(cc, s))
-            }
+            getEntityName={getStationName && ((s, cc) => getStationName(cc, s))}
             setLocation={location => {
               setClickedVehicle(undefined);
               setLocation(location);
