@@ -2,8 +2,7 @@ module.exports = {
   cacheDirectory: ".jest-cache",
   coverageDirectory: ".jest-coverage",
   coveragePathIgnorePatterns: [
-    "<rootDir>/packages/(?:.+?)/lib/",
-    "<rootDir>/packages/(?:.+?)/esm/"
+    "<rootDir>/packages/(?:.+?)/dist/"
   ],
   coverageReporters: ["html", "text"],
   coverageThreshold: {
@@ -31,8 +30,7 @@ module.exports = {
     "\\.(svg)$": "<rootDir>/__mocks__/file-mock.js"
   },
   testPathIgnorePatterns: [
-    "<rootDir>/packages/.*/lib/",
-    "<rootDir>/packages/.*/esm/",
+    "<rootDir>/packages/.*/dist/",
     "a11y",
     "\\.d\\.ts"
   ],
