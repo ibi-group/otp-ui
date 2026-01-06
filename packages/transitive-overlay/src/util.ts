@@ -219,17 +219,16 @@ export function itineraryToTransitive(
     getRouteLabel?: (leg: Leg) => string;
     disableFlexArc?: boolean;
     intl?: IntlShape;
-    isFlexOverride?: (leg: Leg) => boolean;
+    isFlexCheck?: (leg: Leg) => boolean;
   }
 ): TransitiveData {
   const {
     companies,
     getRouteLabel,
     disableFlexArc,
-    isFlexOverride,
+    isFlexCheck: isFlexOverride = isFlex,
     intl
   } = options;
-  const isFlexCheck = isFlexOverride || isFlex;
 
   const tdata = {
     journeys: [],
@@ -410,7 +409,7 @@ export function itineraryToTransitive(
       // (Do not label stop names if they repeat.)
       const lastCoord = hasLegGeometry && legCoords[legCoords.length - 1];
       const modifiedToStop = makeStop(
-        renameLegFlexStops(leg, isFlexCheck),
+        renameLegFlexStops(leg, isFlexOverride),
         lastCoord
       );
       addStop(modifiedToStop, newStops, knownStopNames);
@@ -462,7 +461,7 @@ export function itineraryToTransitive(
       journey.segments.push({
         arc:
           typeof disableFlexArc === "undefined"
-            ? isFlexCheck(leg)
+            ? isFlexOverride(leg)
             : !disableFlexArc,
         type: "TRANSIT",
         patterns: [
