@@ -159,16 +159,7 @@ const BaseMap = ({
         // If the user is pinching the map or does other multi-touch actions, cancel long-press detection.
         const touchPointCount = e.points.length;
         if (touchPointCount === 1 && onContextMenu) {
-          setLongPressTimer(
-            setTimeout(
-              // In practice, MapLayerTouchEvent and MapTouchEvent behave as if they were
-              // subclasses of MapLayerMouseEvent and MapMouseEvent, respectively,
-              // so the conversion from touch to mouse event works, with the caveat that
-              // the `type` prop takes different string values between mouse and touch events.
-              () => onContextMenu(e),
-              600
-            )
-          );
+          setLongPressTimer(window.setTimeout(() => onContextMenu(e), 600));
         } else {
           clearLongPressTimer();
         }
