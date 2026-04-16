@@ -83,9 +83,7 @@ const BaseMap = ({
   // Firefox and Safari on iOS: hover is not triggered when the user touches the layer selector
   // (unlike Firefox or Chromium on Android), so we have to detect touch and trigger hover ourselves.
   const [fakeMobileHover, setFakeHover] = useState(false);
-  const [longPressTimer, setLongPressTimer] = useState<
-    NodeJS.Timeout | undefined
-  >();
+  const [longPressTimer, setLongPressTimer] = useState<number | undefined>();
 
   const toggleableLayers = Array.isArray(children)
     ? children
