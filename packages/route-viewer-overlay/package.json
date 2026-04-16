@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "@opentripplanner/types": "workspace:*",
+    "@types/point-in-polygon": "^1.1.5",
     "point-in-polygon": "^1.1.0"
   },
   "peerDependencies": {
