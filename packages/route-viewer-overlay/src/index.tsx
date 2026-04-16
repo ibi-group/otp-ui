@@ -259,7 +259,9 @@ const RouteViewerOverlay = (props: Props): JSX.Element => {
     }
 
     // Clear any timeouts when the component unmounts.
-    return () => clearTimeout(timeout);
+    return () => {
+      if (timeout) clearTimeout(timeout);
+    };
   }, [routeData, patterns, current]);
 
   const { clipToPatternStops, path } = props;
