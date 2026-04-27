@@ -504,7 +504,6 @@ export function itineraryToTransitive(
   return tdata;
 }
 
-// typescript TODO: TYPE
 const drawArc = (straight: LineString) => {
   // Create clone of plain route that only includes first and last point
   straight.coordinates = [
