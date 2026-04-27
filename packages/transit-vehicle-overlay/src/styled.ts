@@ -141,17 +141,15 @@ export function withRouteColorBackground(
 /**
  * Generate and memoize a container component once per set of container/pixels/padding parameters.
  */
-export const getStyledContainer = memoize(
-  (
-    IconContainer: FC<VehicleComponentProps>,
-    padding: number,
-    pixels: number
-  ): FC<VehicleComponentProps> => {
-    return styled(IconContainer)<VehicleComponentProps>`
-      height: ${pixels}px;
-      line-height: ${pixels}px;
-      padding: ${padding}px;
-      width: ${pixels}px;
-    `;
-  }
-);
+export const getStyledContainer: (
+  IconContainer: FC<VehicleComponentProps>,
+  padding: number,
+  pixels: number
+) => FC<VehicleComponentProps> = memoize((IconContainer, padding, pixels) => {
+  return styled(IconContainer)<VehicleComponentProps>`
+    height: ${pixels}px;
+    line-height: ${pixels}px;
+    padding: ${padding}px;
+    width: ${pixels}px;
+  `;
+});
