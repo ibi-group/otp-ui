@@ -8,13 +8,18 @@ import colors from "@opentripplanner/building-blocks";
 const COLUMN_WIDTH = "85px";
 
 const NoticeSymbol = styled.span`
-  cursor: default;
   border: solid black;
-  padding: 3px;
-  size: 15;
+  border-radius: 50%;
+  cursor: default;
+  display: block;
+  height: 20px;
+  width: 20px;
 `;
 
 const Notice = styled.div`
+  display: flex;
+  justify-content: center;
+
   .trip-notice-hover-content {
     display: none;
   }
@@ -24,6 +29,7 @@ const Notice = styled.div`
     display: flex;
     flex-direction: column;
     position: absolute;
+    transform: translateY(25px);
   }
 `;
 
