@@ -18,7 +18,6 @@ const NoticeSymbol = styled.span`
 
 const Notice = styled.div`
   display: flex;
-  justify-content: center;
 
   .trip-notice-hover-content {
     display: none;
@@ -26,10 +25,15 @@ const Notice = styled.div`
 
   :hover .trip-notice-hover-content {
     background-color: ${colors.grey[200]};
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
+    padding-right: 40px;
     position: absolute;
-    transform: translateY(25px);
+    text-align: left;
+    text-wrap: wrap;
+    transform: translateX(25px) translateY(-80%);
+    max-width: 600px;
   }
 `;
 
@@ -37,9 +41,11 @@ const GenerateNotice = (content: string[]) => (
   <Notice>
     <NoticeSymbol className="trip-notice-symbol">{"\u2139"}</NoticeSymbol>
     <div className="trip-notice-hover-content">
-      {content.map(s => (
-        <span key={s}>{s}</span>
-      ))}
+      <ul>
+        {content.map(s => (
+          <li key={s}>{s}</li>
+        ))}
+      </ul>
     </div>
   </Notice>
 );
@@ -48,6 +54,10 @@ const Table = styled.table`
   display: block;
   overflow: auto;
   width: 100%;
+
+  th.notices-column {
+    min-width: 0;
+  }
 `;
 
 const TBody = styled.tbody`
@@ -368,10 +378,19 @@ const TimeTable = (props: TimeTableProps): JSX.Element => {
       .sort(comparator);
   }, [allTrips, comparator]);
 
-  const leadingColumns: { id: string; name: string }[] = useMemo(() => {
-    const arr: { id: string; name: string }[] = [];
+  const leadingColumns: {
+    id: string;
+    name: string;
+    className?: string;
+  }[] = useMemo(() => {
+    const arr: { id: string; name: string; className?: string }[] = [];
 
-    if (showNotices) arr.push({ id: "tripNotesHeader", name: "Notices" });
+    if (showNotices)
+      arr.push({
+        id: "tripNotesHeader",
+        name: "",
+        className: "notices-column"
+      });
     if (showBlockId) arr.push({ id: "blockIdHeader", name: "Block ID" });
 
     return arr;
@@ -384,7 +403,9 @@ const TimeTable = (props: TimeTableProps): JSX.Element => {
           {leadingColumns.concat(filteredPatternStops).map((s, index) => {
             return (
               <TH
-                className="timetable-th"
+                className={`timetable-th${
+                  s.className ? ` ${s.className}` : ""
+                }`}
                 key={index}
                 scope="col"
                 closed={closedStops && closedStops.has(s.id)}

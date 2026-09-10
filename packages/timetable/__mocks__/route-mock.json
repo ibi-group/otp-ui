@@ -17,6 +17,9 @@
                 },
                 {
                   "text": "Trip runs only on school days"
+                },
+                {
+                  "text": "This is a longer notice. The purpose of this notice is to ensure that acceptable standards of placement, readability, and formatting are achieved. This trip will be canceled if the sufficient layout and readability concerns are not addressed!"
                 }
               ],
               "stoptimesForDate": [
@@ -2085,6 +2088,20 @@
             },
             {
               "blockId": "168373",
+              "notices": [
+                {
+                  "text": "Example notice"
+                },
+                {
+                  "text": "Exit through front door"
+                },
+                {
+                  "text": "Trip runs only on school days"
+                },
+                {
+                  "text": "This is a longer notice. The purpose of this notice is to ensure that acceptable standards of placement, readability, and formatting are achieved. This trip will be canceled if the sufficient layout and readability concerns are not addressed!"
+                }
+              ],
               "stoptimesForDate": [
                 {
                   "serviceDay": 1780290000,
@@ -3129,7 +3146,13 @@
                   "text": "Example notice"
                 },
                 {
-                  "text": "Trip runs late on game days"
+                  "text": "Exit through front door"
+                },
+                {
+                  "text": "Trip runs only on school days"
+                },
+                {
+                  "text": "This is a longer notice. The purpose of this notice is to ensure that acceptable standards of placement, readability, and formatting are achieved. This trip will be canceled if the sufficient layout and readability concerns are not addressed!"
                 }
               ],
               "stoptimesForDate": [
