@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`Timetable Default smoke-test 1`] = `
-<table class="src__Table-sc-1glc48y-2 cisdmp timetable-table"
+<table class="src__Table-sc-1glc48y-2 jiEjEr timetable-table"
        tabindex="0"
 >
   <thead class="timetable-thead">
