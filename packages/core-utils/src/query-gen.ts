@@ -3,7 +3,8 @@ import { print } from "graphql";
 import {
   ModeSetting,
   ModeSettingValues,
-  TransportMode
+  PlanModesInput,
+  PlanModesInputContainer
 } from "@opentripplanner/types";
 
 import { formatInTimeZone } from "date-fns-tz";
@@ -20,7 +21,7 @@ type OTPQueryParams = {
   date?: string;
   departArrive?: string;
   from: LonLatOutput & { name?: string };
-  modes: TransportMode[];
+  modes: PlanModesInput;
   modeSettings: ModeSetting[];
   numItineraries?: number;
   omitCanceled?: boolean;
@@ -44,11 +45,11 @@ type GraphQLQuery = {
  */
 export function extractAdditionalModes(
   modeSettings: ModeSetting[],
-  enabledModes: TransportMode[]
-): TransportMode[] {
-  return modeSettings.reduce<TransportMode[]>((prev, cur) => {
+  enabledModes: PlanModesInputContainer[]
+): PlanModesInput[] {
+  return modeSettings.reduce<PlanModesInput[]>((prev, cur) => {
     // First, ensure that the mode associated with this setting is even enabled
-    if (!enabledModes.map(m => m.mode).includes(cur.applicableMode)) {
+    if (!enabledModes.map(m => m.id).includes(cur.applicableMode)) {
       return prev;
     }
 
@@ -81,21 +82,31 @@ export function extractAdditionalModes(
  * @param params OTP Query Params
  * @returns Set of parameters to generate queries
  */
-export function generateCombinations(params: OTPQueryParams): OTPQueryParams[] {
+export function generateCombinations(params: Omit<OTPQueryParams, "modes">, modes: PlanModesInputContainer[]): OTPQueryParams[] {
   const completeModeList = [
-    ...extractAdditionalModes(params.modeSettings, params.modes),
-    ...params.modes
-  ];
+    ...extractAdditionalModes(params.modeSettings, modes),
+    ...modes.map(m => m.input)
+    ].filter(m => !!m);
 
-  // List of the transit *submodes* that are included in the input params
-  const transitModes = completeModeList
-    .filter(mode => isTransit(mode.mode) && mode.mode !== "TRANSIT")
+  // Extract all the various transit modes from our list of enabled modes
+  // This is things like BUS, TRAIN, etc, and we want to make sure they're all included in each request
+  const transitSubmodes = completeModeList
+    .flatMap(mode => mode?.transit?.transit?.map(t => t.mode))
+    .filter(mode => !!mode && isTransit(mode) && mode !== "TRANSIT")
+    .filter(m => m !== undefined)
+    .map(m => ({ mode: m }))
 
-  // @ts-expect-error types packagge fail
   return completeModeList
-    .filter(mode => !!mode.input)
-    // @ts-expect-error types packagge fail
-    .map(mode => ({ ...params, modes: { ...mode.input, transit: { ...mode?.input?.transit, ...transitModes.length > 0 && { transit: transitModes } } } }));
+    .map(mode => ({
+      ...params,
+      modes: {
+        ...mode,
+        transit: {
+          ...mode?.transit,
+           transit: transitSubmodes.length > 0 ? transitSubmodes : undefined
+        }
+      }
+    }));
 }
 
 /**
