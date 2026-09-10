@@ -774,7 +774,7 @@ export type DropdownOptions = {
   options: {
     text: string;
     value: string;
-    addTransportMode?: TransportMode;
+    addTransportMode?: PlanModesInput;
   }[];
   type: "DROPDOWN";
   value?: string;
@@ -795,7 +795,7 @@ export type SliderOptions = {
 
 export type CheckboxOptions = {
   // This transport mode should match an OTP transport mode
-  addTransportMode?: TransportMode | TransportMode[];
+  addTransportMode?: PlanModesInput | PlanModesInput[];
   default?: boolean;
   label: string;
   type: "CHECKBOX";
@@ -806,7 +806,7 @@ export type CheckboxOptions = {
 
 export type TransitSubmodeCheckboxOption = {
   // This transport mode should match an OTP transport mode
-  addTransportMode: TransportMode;
+  addTransportMode: PlanModesInput;
   default?: boolean;
   label: string;
   // We might want to specify a secondary, "override" mode to this checkbox.
@@ -832,22 +832,30 @@ export type ModeSetting = (
   ModeSettingBase;
 export type ModeSettingValues = Record<string, number | string | boolean>;
 
+export type PlanModesInputContainer = {
+  id: string;
+  input?: PlanModesInput;
+};
+
+export type PlanModesInput = {
+  direct: string[];
+  directOnly: boolean;
+  transit: ModeInput;
+  transitOnly: boolean;
+};
+
 /**
  * TransportModes correspond with the OTP GraphQL TransportMode.
  * Could be anything from walk, bike to transit, tram, or bus.
  */
 export type TransportMode = { mode: string; input?: ModeInput };
 
-export type ModeInput =
-  | {
-      access: string[];
-      egress: string[];
-      transfer?: string[]; // Not actually, but for our config yes
-      transit: { mode: string }[];
-    }
-  | {
-      direct: string[];
-    };
+export type ModeInput = {
+  access?: string[];
+  egress?: string[];
+  transfer?: string[]; // Not actually, but for our config yes
+  transit?: { mode: string }[];
+};
 
 /**
  * This is a combination of transportation modes,
