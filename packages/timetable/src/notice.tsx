@@ -13,7 +13,7 @@ const NoticeSymbol = styled.span`
 `;
 
 const NoticeContent = styled.div`
-  background-color: ${colors.grey[200]};
+  background-color: ${colors.grey[100]};
   border-radius: 10px;
   display: flex;
   flex-direction: row;
