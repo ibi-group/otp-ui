@@ -3,52 +3,9 @@ import { IntlShape } from "react-intl";
 import styled from "styled-components";
 import toposort from "toposort";
 
-import colors from "@opentripplanner/building-blocks";
+import Notice from "./Notice";
 
 const COLUMN_WIDTH = "85px";
-
-const NoticeSymbol = styled.span`
-  border: solid black;
-  border-radius: 50%;
-  cursor: default;
-  display: block;
-  height: 20px;
-  width: 20px;
-`;
-
-const Notice = styled.div`
-  display: flex;
-
-  .trip-notice-hover-content {
-    display: none;
-  }
-
-  :hover .trip-notice-hover-content {
-    background-color: ${colors.grey[200]};
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    padding-right: 40px;
-    position: absolute;
-    text-align: left;
-    text-wrap: wrap;
-    transform: translateX(25px) translateY(-80%);
-    max-width: 600px;
-  }
-`;
-
-const GenerateNotice = (content: string[]) => (
-  <Notice>
-    <NoticeSymbol className="trip-notice-symbol">{"\u2139"}</NoticeSymbol>
-    <div className="trip-notice-hover-content">
-      <ul>
-        {content.map(s => (
-          <li key={s}>{s}</li>
-        ))}
-      </ul>
-    </div>
-  </Notice>
-);
 
 const Table = styled.table`
   display: block;
@@ -425,7 +382,7 @@ const TimeTable = (props: TimeTableProps): JSX.Element => {
           if (showNotices) {
             rowValues.push({
               closed: false,
-              value: t.notices ? GenerateNotice(t.notices) : ""
+              value: t.notices ? <Notice content={t.notices} /> : ""
             });
           }
           if (showBlockId) rowValues.push({ closed: false, value: t.blockId });
