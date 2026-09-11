@@ -47,6 +47,7 @@ const Notice = (props: Props): JSX.Element => {
       <NoticeSymbol
         className="trip-notice-symbol"
         onClick={() => setIsOpen(!isOpen)}
+        role="button"
       >
         {"\u2139"}
       </NoticeSymbol>
