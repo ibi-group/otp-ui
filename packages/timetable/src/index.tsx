@@ -91,6 +91,18 @@ interface Stop {
   name: string;
 }
 
+/** Describes the content of the header for a leading column. Leading
+ * columns are optional columns that are appended to the beginning of
+ * the timetable.
+ */
+interface LeadingColumnHeader {
+  /** ARIA label to use for leading columns that don't have header text */
+  ariaLabel?: string;
+  className?: string;
+  id: string;
+  name: string;
+}
+
 const createDwellStops = (trips: Trip[], timepoints: Set<string>): Trip[] => {
   // To accommodate "dwell stops" where arrival and departure time are different,
   // we need to look for such stops and create an additional "dwell stop" within
@@ -335,18 +347,15 @@ const TimeTable = (props: TimeTableProps): JSX.Element => {
       .sort(comparator);
   }, [allTrips, comparator]);
 
-  const leadingColumns: {
-    id: string;
-    name: string;
-    className?: string;
-  }[] = useMemo(() => {
-    const arr: { id: string; name: string; className?: string }[] = [];
+  const leadingColumns: LeadingColumnHeader[] = useMemo(() => {
+    const arr: LeadingColumnHeader[] = [];
 
     if (showNotices)
       arr.push({
+        ariaLabel: "Notices",
+        className: "notices-column",
         id: "tripNotesHeader",
-        name: "",
-        className: "notices-column"
+        name: ""
       });
     if (showBlockId) arr.push({ id: "blockIdHeader", name: "Block ID" });
 
@@ -357,13 +366,14 @@ const TimeTable = (props: TimeTableProps): JSX.Element => {
     <Table className="timetable-table" tabIndex={0}>
       <thead className="timetable-thead">
         <tr>
-          {leadingColumns.concat(filteredPatternStops).map((s, index) => {
+          {leadingColumns.concat(filteredPatternStops).map(s => {
             return (
               <TH
+                aria-label={s.ariaLabel}
                 className={`timetable-th${
                   s.className ? ` ${s.className}` : ""
                 }`}
-                key={index}
+                key={s.id}
                 scope="col"
                 closed={closedStops && closedStops.has(s.id)}
               >
