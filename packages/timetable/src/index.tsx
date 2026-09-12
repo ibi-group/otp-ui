@@ -3,7 +3,7 @@ import { IntlShape } from "react-intl";
 import styled from "styled-components";
 import toposort from "toposort";
 
-import Notice from "./Notice";
+import Notice from "./notice";
 
 const COLUMN_WIDTH = "85px";
 
