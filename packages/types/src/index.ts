@@ -774,7 +774,7 @@ export type DropdownOptions = {
   options: {
     text: string;
     value: string;
-    addTransportMode?: PlanModesInput;
+    addTransportMode?: TransportMode;
   }[];
   type: "DROPDOWN";
   value?: string;
@@ -795,7 +795,7 @@ export type SliderOptions = {
 
 export type CheckboxOptions = {
   // This transport mode should match an OTP transport mode
-  addTransportMode?: PlanModesInput | PlanModesInput[];
+  addTransportMode?: TransportMode | TransportMode[];
   default?: boolean;
   label: string;
   type: "CHECKBOX";
@@ -806,7 +806,7 @@ export type CheckboxOptions = {
 
 export type TransitSubmodeCheckboxOption = {
   // This transport mode should match an OTP transport mode
-  addTransportMode: PlanModesInput;
+  addTransportMode: TransportMode;
   default?: boolean;
   label: string;
   // We might want to specify a secondary, "override" mode to this checkbox.
@@ -832,30 +832,32 @@ export type ModeSetting = (
   ModeSettingBase;
 export type ModeSettingValues = Record<string, number | string | boolean>;
 
-export type PlanModesInputContainer = {
-  id: string;
-  input?: PlanModesInput;
+export type PlanModesInput = {
+  direct?: string[];
+  directOnly?: boolean;
+  transit?: PlanTransitModesInput;
+  transitOnly?: boolean;
 };
 
-export type PlanModesInput = {
-  direct: string[];
-  directOnly: boolean;
-  transit: ModeInput;
-  transitOnly: boolean;
+export type PlanTransitModesInput = {
+  access?: string[];
+  egress?: string[];
+  transfer?: string[];
+  transit?: PlanTransitModePreferenceInput[];
+};
+
+export type PlanTransitModePreferenceInput = {
+  mode: string;
+  cost?: { reluctance: number };
+  replacement?: { requirement?: string };
 };
 
 /**
- * TransportModes correspond with the OTP GraphQL TransportMode.
- * Could be anything from walk, bike to transit, tram, or bus.
+ * A mode selected by the UI, with an optional PlanConnection input for a query.
  */
 export type TransportMode = { mode: string; input?: ModeInput };
 
-export type ModeInput = {
-  access?: string[];
-  egress?: string[];
-  transfer?: string[]; // Not actually, but for our config yes
-  transit?: { mode: string }[];
-};
+export type ModeInput = PlanModesInput;
 
 /**
  * This is a combination of transportation modes,

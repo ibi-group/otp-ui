@@ -4,7 +4,7 @@ import {
   ModeSetting,
   ModeSettingValues,
   PlanModesInput,
-  PlanModesInputContainer
+  TransportMode
 } from "@opentripplanner/types";
 
 import { formatInTimeZone } from "date-fns-tz";
@@ -31,6 +31,10 @@ type OTPQueryParams = {
   via?: OTPViaLocationInput[]
 };
 
+type GenerateCombinationsParams = Omit<OTPQueryParams, "modes"> & {
+  modes: TransportMode[];
+};
+
 type GraphQLQuery = {
   query: string;
   variables: Record<string, unknown>;
@@ -45,11 +49,11 @@ type GraphQLQuery = {
  */
 export function extractAdditionalModes(
   modeSettings: ModeSetting[],
-  enabledModes: PlanModesInputContainer[]
-): PlanModesInput[] {
-  return modeSettings.reduce<PlanModesInput[]>((prev, cur) => {
+  enabledModes: TransportMode[]
+): TransportMode[] {
+  return modeSettings.reduce<TransportMode[]>((prev, cur) => {
     // First, ensure that the mode associated with this setting is even enabled
-    if (!enabledModes.map(m => m.id).includes(cur.applicableMode)) {
+    if (!enabledModes.map(m => m.mode).includes(cur.applicableMode)) {
       return prev;
     }
 
@@ -79,34 +83,36 @@ export function extractAdditionalModes(
 
 /**
  * Generates a list of queries for OTP based on planConnection config
- * @param params OTP Query Params
+ * @param params OTP query params with mode definitions to expand
  * @returns Set of parameters to generate queries
  */
-export function generateCombinations(params: Omit<OTPQueryParams, "modes">, modes: PlanModesInputContainer[]): OTPQueryParams[] {
+export function generateCombinations(params: GenerateCombinationsParams): OTPQueryParams[] {
+  const { modes, ...queryParams } = params;
   const completeModeList = [
     ...extractAdditionalModes(params.modeSettings, modes),
-    ...modes.map(m => m.input)
-    ].filter(m => !!m);
+    ...modes
+  ];
 
-  // Extract all the various transit modes from our list of enabled modes
-  // This is things like BUS, TRAIN, etc, and we want to make sure they're all included in each request
-  const transitSubmodes = completeModeList
-    .flatMap(mode => mode?.transit?.transit?.map(t => t.mode))
-    .filter(mode => !!mode && isTransit(mode) && mode !== "TRANSIT")
-    .filter(m => m !== undefined)
-    .map(m => ({ mode: m }))
+  // Apply every selected transit submode to every compound mode query.
+  const transitSubmodes = completeModeList.flatMap(
+    ({ mode, input }) =>
+      input?.transit?.transit ??
+      (isTransit(mode) && mode !== "TRANSIT" ? [{ mode }] : [])
+  );
 
-  return completeModeList
-    .map(mode => ({
-      ...params,
-      modes: {
-        ...mode,
-        transit: {
-          ...mode?.transit,
-           transit: transitSubmodes.length > 0 ? transitSubmodes : undefined
-        }
+  return completeModeList.flatMap(({ input }) => {
+    if (!input) return [];
+
+    return [
+      {
+        ...queryParams,
+        modes:
+          transitSubmodes.length > 0
+            ? { ...input, transit: { ...input.transit, transit: transitSubmodes } }
+            : input
       }
-    }));
+    ];
+  });
 }
 
 /**

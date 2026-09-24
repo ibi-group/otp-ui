@@ -2,7 +2,7 @@ import { ModeSetting, TransportMode } from "@opentripplanner/types";
 
 import { reduceOtpFlexModes } from "../query";
 import queryParams, { getCustomQueryParams } from "../query-params";
-import { extractAdditionalModes } from "../query-gen";
+import { extractAdditionalModes, generateCombinations } from "../query-gen";
 
 const customWalkDistanceOptions = [
   {
@@ -65,6 +65,34 @@ describe("extract-modes", () => {
     expect(extractAdditionalModes([{ ...checkboxModeSetting }], [])).toEqual(
       []
     );
+  });
+});
+
+describe("generateCombinations", () => {
+  it("includes every compound mode's transit submodes in each query", () => {
+    const bus = { mode: "BUS", cost: { reluctance: 2 } };
+    const rail = { mode: "RAIL", replacement: { requirement: "REQUIRED" } };
+    const combinations = generateCombinations({
+      arriveBy: false,
+      from: { lat: 1, lon: 2 },
+      modeSettings: [],
+      modes: [
+        {
+          mode: "WALK",
+          input: { direct: ["WALK"], transit: { transit: [bus] } }
+        },
+        {
+          mode: "BICYCLE",
+          input: { direct: ["BICYCLE"], transit: { transit: [rail] } }
+        }
+      ],
+      to: { lat: 3, lon: 4 }
+    });
+
+    expect(combinations.map(({ modes }) => modes)).toEqual([
+      { direct: ["WALK"], transit: { transit: [bus, rail] } },
+      { direct: ["BICYCLE"], transit: { transit: [bus, rail] } }
+    ]);
   });
 });
 
