@@ -855,9 +855,7 @@ export type PlanTransitModePreferenceInput = {
 /**
  * A mode selected by the UI, with an optional PlanConnection input for a query.
  */
-export type TransportMode = { mode: string; input?: ModeInput };
-
-export type ModeInput = PlanModesInput;
+export type TransportMode = { mode: string; input?: PlanModesInput };
 
 /**
  * This is a combination of transportation modes,
