@@ -86,33 +86,31 @@ export function extractAdditionalModes(
  * @param params OTP query params with mode definitions to expand
  * @returns Set of parameters to generate queries
  */
-export function generateCombinations(params: GenerateCombinationsParams): OTPQueryParams[] {
-  const { modes, ...queryParams } = params;
+export function generateCombinations(
+  params: GenerateCombinationsParams
+): OTPQueryParams[] {
   const completeModeList = [
-    ...extractAdditionalModes(params.modeSettings, modes),
-    ...modes
+    ...extractAdditionalModes(params.modeSettings, params.modes),
+    ...params.modes
   ];
 
-  // Apply every selected transit submode to every compound mode query.
-  const transitSubmodes = completeModeList.flatMap(
-    ({ mode, input }) =>
-      input?.transit?.transit ??
-      (isTransit(mode) && mode !== "TRANSIT" ? [{ mode }] : [])
+  // List of the transit *submodes* that are included in the input params
+  const transitModes = completeModeList.filter(
+    mode => isTransit(mode.mode) && mode.mode !== "TRANSIT"
   );
 
-  return completeModeList.flatMap(({ input }) => {
-    if (!input) return [];
-
-    return [
-      {
-        ...queryParams,
-        modes:
-          transitSubmodes.length > 0
-            ? { ...input, transit: { ...input.transit, transit: transitSubmodes } }
-            : input
+  return completeModeList
+    .filter(mode => !!mode.input)
+    .map(mode => ({
+      ...params,
+      modes: {
+        ...mode.input,
+        transit: {
+          ...mode?.input?.transit,
+          ...(transitModes.length > 0 && { transit: transitModes })
+        }
       }
-    ];
-  });
+    }));
 }
 
 /**
